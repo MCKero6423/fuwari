@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://blog.mckero.com/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/about/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?category=Examples</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?category=Guides</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?tag=Blogging</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?tag=Customization</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?tag=Demo</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?tag=Example</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?tag=Fuwari</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?tag=Markdown</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/archive/?tag=Video</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/posts/markdown-extended/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/posts/expressive-code/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/posts/guide/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/posts/markdown/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mckero.com/posts/video/</loc>
+  <lastmod>2025-08-11T13:03:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
