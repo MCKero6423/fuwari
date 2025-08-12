@@ -2,7 +2,6 @@
 title: Ipv4和iv6有啥区别？
 published: 2025-08-12
 description: 这是一个介绍ipv4和ipv4的文章。
-image: ./cover.jpg
 tags: [ipv4, ipv6]
 category: Network
 draft: false
