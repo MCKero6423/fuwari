@@ -19,6 +19,10 @@ lang: zh_CN
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer async></script>
+<!-- hCaptcha -->
+    <script src="https://hcaptcha.com/1/api.js?recaptchacompat=off&hl=zh" async defer></script>
+
+</head>
 
 ## reCaptcha (Google 的人机验证)
  <div class="g-recaptcha" data-sitekey="6LdDuKQrAAAAADf7Mjk0uGk8TpE4pS6tZGVJysmd"></div>
@@ -43,3 +47,7 @@ lang: zh_CN
   }
 </script>
 
+---
+
+## hCaptcha
+<div class="h-captcha" style="margin: 0; display: inline-block;" data-sitekey="1dc07006-278c-40ca-81b8-546642281d1c></div>
