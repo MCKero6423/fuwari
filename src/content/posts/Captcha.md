@@ -15,8 +15,8 @@ lang: zh_CN
 
   <head>
     <title>reCAPTCHA demo: Simple page</title>
-    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+    <script src="https://recaptcha.net/recaptcha/enterprise.js" async defer></script>
 
-## reCaptcha (Google 的人机验证)
+## reCaptcha (Google的人机验证)
  <div class="g-recaptcha" data-sitekey="6LdDuKQrAAAAADf7Mjk0uGk8TpE4pS6tZGVJysmd"></div>
 
