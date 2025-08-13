@@ -50,4 +50,4 @@ lang: zh_CN
 ---
 
 ## hCaptcha
-<div class="h-captcha" style="margin: 0; display: inline-block;" data-sitekey="1dc07006-278c-40ca-81b8-546642281d1c></div>
+<div class="h-captcha" style="margin: 0; display: inline-block;" data-sitekey="e75ec484-1922-4a76-a28a-a31446729c1e></div>
