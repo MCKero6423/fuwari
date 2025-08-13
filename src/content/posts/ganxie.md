@@ -18,3 +18,7 @@ lang: zh_CN
 ## 博客使用Umami cloud来统计访问次数
 
 >https://umami.is/
+
+## 感谢我的朋友马昱T的陪伴
+
+>114514
