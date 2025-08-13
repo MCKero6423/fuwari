@@ -9,14 +9,15 @@ lang: zh_CN
 ---
 # 你是机器人吗?
 
->目前只有一个人机验证后面会添加更多。
+>目前只有一个人机验
+>证后面会添加更多。
 
 ---
 
   <head>
     <title>reCAPTCHA demo: Simple page</title>
-    <script src="https://recaptcha.net/recaptcha/enterprise.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 
-## reCaptcha (Google的人机验证)
+## reCaptcha (Google 的人机验证)
  <div class="g-recaptcha" data-sitekey="6LdDuKQrAAAAADf7Mjk0uGk8TpE4pS6tZGVJysmd"></div>
 
