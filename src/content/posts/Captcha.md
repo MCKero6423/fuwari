@@ -9,7 +9,7 @@ lang: zh_CN
 ---
 # 你是机器人吗?
 
->目前只有两个人机验
+>目前只有一个人机验
 >证后面会添加更多。
 
 ---
@@ -19,10 +19,6 @@ lang: zh_CN
     <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
 <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer async></script>
-<!-- hCaptcha -->
-    <script src="https://hcaptcha.com/1/api.js?recaptchacompat=off&hl=zh" async defer></script>
-
-</head>
 
 ## reCaptcha (Google 的人机验证)
  <div class="g-recaptcha" data-sitekey="6LdDuKQrAAAAADf7Mjk0uGk8TpE4pS6tZGVJysmd"></div>
@@ -47,7 +43,3 @@ lang: zh_CN
   }
 </script>
 
----
-
-## hCaptcha
-<div class="h-captcha" style="margin: 0; display: inline-block;" data-sitekey="e75ec484-1922-4a76-a28a-a31446729c1e></div>
