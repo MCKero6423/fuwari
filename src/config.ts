@@ -55,6 +55,11 @@ export const navBarConfig: NavBarConfig = {
       url: "https://status.mckero.com", // Internal links should not include the base path, as it is automatically added
       external: true, // Show an external link icon and will open in a new tab
 		},
+		{
+      name: "统计信息",
+      url: "https://umami.mckero.com/share/v4wXkxwCYns2ypLN/blog.mckero.com", // Internal links should not include the base path, as it is automatically added
+      external: true, // Show an external link icon and will open in a new tab
+      },
 	],
 };
 
