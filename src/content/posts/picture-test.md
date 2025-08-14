@@ -3,7 +3,7 @@ title: 我的博客有图片了
 published: 2025-08-13
 description: 图片测试文章
 tags: [图床,图片,测试]
-category:测试
+category: 测试
 draft: false
 lang: zh_CN
 ---
