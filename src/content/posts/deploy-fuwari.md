@@ -3,7 +3,7 @@ title: 在 Linux 服务器上用 pnpm 部署 Fuwari（Astro）博客
 published: 2025-08-15
 description: 在无桌面的 Linux 环境用 pnpm 安装、构建并发布 Fuwari（Astro）静态博客的实操步骤与长期维护建议。
 tags: [部署,Astro,Fuwari]
-category: 人机验证
+category: 部署
 draft: false
 lang: zh_CN
 ---
