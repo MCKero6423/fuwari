@@ -1,15 +1,15 @@
 ---
 title: 你是人机吗？
 published: 2025-08-13
-description: 一篇关于人机验证的文章。
-tags: [人机验证, Captcha，reCaptcha，Cloudflare Turnstile]
+description: 一篇关于人机验证的文章。有两个人机验证可以玩儿。
+tags: [人机验证, Captcha,reCaptcha,Cloudflare Turnstile]
 category: 人机验证
 draft: false
 lang: zh_CN
 ---
 # 你是机器人吗?
 
->目前只有一个人机验
+>目前只有两个人机验
 >证后面会添加更多。
 
 ---
