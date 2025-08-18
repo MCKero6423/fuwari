@@ -1,6 +1,6 @@
 ---
 title: 我的博客文章旁边终于可以显示浏览量了!
-published: 2025-08-13
+published: 2025-08-18
 description: 我的博客文章旁边终于可以显示浏览量了!
 tags: [umami,浏览量,统计]
 category: 博客浏览量显示
