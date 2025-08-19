@@ -1,7 +1,7 @@
 ---
 title: Firefox浏览器是怎么保护用户隐私的？
 published: 2025-08-19
-tags: ["浏览器,Firefox,火狐"]
+tags: ["浏览器，Firefox，火狐"]
 description: 这是一篇介绍Firefox浏览器是怎么保护用户隐私的文章,在文章中详细讲述了Firefox是怎么保护用户隐私的。
 image: ../assets/images/Firefox-icon.png
 category: 网络
