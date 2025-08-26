@@ -6,6 +6,7 @@ tags: [收音机,tecsun pl-330]
 category: 收音机
 draft: false
 lang: zh_CN
+series: "无线电"
 ---
 # Tecsun PL-330：口袋里的短波世界 - 小体积大功能的DSP收音机深度解析
 

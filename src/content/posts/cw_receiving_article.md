@@ -6,6 +6,7 @@ tags: [短波, 摩尔斯电码, CW, 业余无线电, 电码接收, 波段选择]
 category: 无线电通信
 draft: false
 lang: zh_CN
+series: "无线电"
 ---
 
 # 短波摩尔斯电码接收技巧：初学者完整指南
