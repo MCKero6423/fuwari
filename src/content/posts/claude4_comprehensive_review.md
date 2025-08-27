@@ -6,6 +6,7 @@ tags: [AI,claude,claude4]
 category: AI
 draft: false
 lang: zh_CN
+series: AI
 ---
 
 # Claude 4全面体验：从代码助手到创作伙伴的AI新时代
