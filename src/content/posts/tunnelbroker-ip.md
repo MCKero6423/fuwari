@@ -28,7 +28,7 @@ lang: zh_CN
 Account Name是账户名，用来登录的。Email要填域名邮箱（免费邮箱好像不能注册tunnelbroker）你想要哪的IP就选哪个国家
 
 ### 创建隧道
-![tunnelbroker-Create-Regular-Tunnel](../assets/images/tunnelbroker-Create-Regular-Tunnel.jpg)
+![tunnelbroker-Create-Regular-Tunnel](../assets/images/tunnelbroker-create-regular-tunnel.jpg)
 点Create Regular Tunnel，IPv4 Endpoint填写VPS的IPV4地址，VPS的IPV4地址要能ping通，Available Tunnel Servers选一个离VPS近的节点，最后点Create Tunnel创建隧道。
 
 ### IP分配
