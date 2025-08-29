@@ -10,6 +10,12 @@ draft: false
 lang: zh_CN
 ---
 
+# 前言
+前几天心血来潮想去整一点稀有的IP，打开b站一搜索，发现了这个视频。
+
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV1eK3uz8ECq" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
 # 用tunnelbroker和warp获得全世界大部分ip
 
 ### 你需要
