@@ -10,12 +10,6 @@ draft: false
 lang: zh_CN
 ---
 
-# 前言
-前几天心血来潮想去整一点稀有的IP，打开b站一搜索，发现了这个视频。
-
-<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV1eK3uz8ECq" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
 # 用tunnelbroker和warp获得全世界大部分ip
 
 ### 你需要
@@ -48,3 +42,8 @@ Tunnelbroker会分配一个IPV6地址给我们，如果想要更多IPV6地址可
 这里使用的是3x-ui面板[github链接](https://github.com/MHSanaei/3x-ui)
 安装好后，按照终端输出的链接和用户名登录，修改用户名和密码，配置入站链接，出战链接选warp,确定后再次编辑，域策略改成ForcelIpv6Ipv4,添加入站规则,Inbound Tags选刚刚入站规则的端口，Outbound Tag选择warp。
 
+### 为什么要使用warp?
+为什么要使用warp?因为我们获得的IP是ipv6的很多网站都不支持ipv6所以说我们需要套warp获得IPv4。
+
+### 感谢oftx
+今天在看Umami的时候看到了一个来自of.nz的访，我的小网站平时也没有什么人访问，我就点进去看[TxBlogF](https://0f.nz/posts/blog-favorites/)我的这篇文章竟然上了[of.nz](https://of.nz/)的博客文章收藏夹。
