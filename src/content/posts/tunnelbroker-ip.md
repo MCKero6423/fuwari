@@ -8,6 +8,7 @@ tags:
 category: 网络
 draft: false
 lang: zh_CN
+updated: 2025-09-05
 ---
 
 # 用tunnelbroker和warp获得全世界大部分ip
