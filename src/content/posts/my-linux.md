@@ -65,7 +65,7 @@ linux-6.16.4/arch/x86/boot/bzImage
 
 选择Download Source接着，滑到最底下找到1.37.0版本(大约2mb左右,那些大小太少的好像是用来校验的,你要是想也可以全下载下来一个一个找😆)
 
-![busybox-download](https://tuchuang.mckero.topbusybox-download.webp)
+![busybox-download](https://tuchuang.mckero.top/busybox-download.webp)
 ```
 wget https://busybox.net/downloads/busybox-1.37.0.tar.bz2
 ```
