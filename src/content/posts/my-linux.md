@@ -61,11 +61,11 @@ linux-6.16.4/arch/x86/boot/bzImage
 
 到busybox的官网下载tar压缩包(这官网有点慢啊！)
 
-![busybox-site](https://github.com/MCKero6423/picx-images-hosting/raw/master/busybox-site.13m4k72a71.webp)
+![busybox-site](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/busybox-site.13m4k72a71.webp)
 
 选择Download Source接着，滑到最底下找到1.37.0版本(大约2mb左右,那些大小太少的好像是用来校验的,你要是想也可以全下载下来一个一个找😆)
 
-![busybox-download](https://github.com/MCKero6423/picx-images-hosting/raw/master/busybox-download.mf9b4p68.webp)
+![busybox-download](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/busybox-download.mf9b4p68.webp)
 ```
 wget https://busybox.net/downloads/busybox-1.37.0.tar.bz2
 ```
