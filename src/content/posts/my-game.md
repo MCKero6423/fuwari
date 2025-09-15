@@ -21,8 +21,4 @@ lang: zh_CN
 - 云储存（云盘，网易云音乐）
 
 # 使命召唤￼
-无畏战士￼
-
-   p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 17.0px ‘.AppleSystemUIFont’} span.s1 {font-family: ‘UICTFontTextStyleBody’; font-weight: normal; font-style: normal; font-size: 17.00px}
-
-<iframe frameborder=“no” border=“0” marginwidth=“0” marginheight=“0” width=330 height=86 src=“//music.163.com/outchain/player?type=2&id= 2601211314&auto=1&height=66”></iframe>
+无畏战士￼[链接](http://music.163.com/song/media/outer/url?id=2601211314.mp3)
