@@ -1,3 +1,15 @@
+---
+title: 我的回忆
+published: 2025-09-15
+description: 本文讲述了我在听音乐的时候听到了我玩的游戏。
+tags:
+  - 游戏
+  - 音乐
+category: 回忆
+draft: false
+lang: zh_CN
+---
+
 # 关于我的游戏回忆
 
 今天在听歌的时候听到了一首关于使命召唤的联动主题曲，我当时直接泪目了。
