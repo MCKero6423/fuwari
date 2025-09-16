@@ -7,7 +7,7 @@
     <meting-js
         server="netease"
         type="playlist"
-        id="你的网易云歌单ID"
+        id="420944487"
         order="random"
         list-folded="true">
     </meting-js>
