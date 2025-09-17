@@ -1,0 +1,69 @@
+---
+import Icon from "@iconify/svelte";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { profileConfig } from "../config.ts";
+import ButtonLink from "../components/control/ButtonLink.astro";
+---
+
+<MainGridLayout banner={false} title="404 - 页面未找到">
+    <div class="card-base px-8 py-8 text-center">
+        <div class="text-9xl font-bold text-neutral-300 dark:text-neutral-600 mb-8">
+            404
+        </div>
+        
+        <h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+            页面未找到
+        </h1>
+        
+        <p class="text-lg text-neutral-600 dark:text-neutral-300 mb-8 max-w-md mx-auto">
+            抱歉，您访问的页面不存在或已被移动。让我们帮您找到正确的路径。
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <ButtonLink url="/" class="btn-primary">
+                <Icon icon="material-symbols:home" class="text-lg" />
+                返回首页
+            </ButtonLink>
+            
+            <ButtonLink url="/archive" class="btn-secondary">
+                <Icon icon="material-symbols:library-books" class="text-lg" />
+                浏览文章
+            </ButtonLink>
+            
+            <ButtonLink url="/about" class="btn-secondary">
+                <Icon icon="material-symbols:person" class="text-lg" />
+                关于我
+            </ButtonLink>
+        </div>
+        
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+            <p class="mb-2">或者您可以：</p>
+            <ul class="space-y-1">
+                <li>检查URL是否正确拼写</li>
+                <li>使用上方的搜索功能查找内容</li>
+                <li>通过导航菜单浏览网站</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 添加一些装饰性元素 -->
+    <div class="mt-8 opacity-20">
+        <div class="flex justify-center items-center text-6xl text-neutral-400">
+            <Icon icon="material-symbols:sentiment-dissatisfied" />
+        </div>
+    </div>
+</MainGridLayout>
+
+<style>
+.btn-primary {
+    @apply bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-2.5 px-6 rounded-lg transition-all duration-300 flex items-center gap-2;
+}
+
+.btn-secondary {
+    @apply bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200 font-medium py-2.5 px-6 rounded-lg transition-all duration-300 flex items-center gap-2;
+}
+
+.card-base {
+    @apply bg-white dark:bg-neutral-900 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700;
+}
+</style>
