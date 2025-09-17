@@ -1,7 +1,7 @@
 ---
-title: 我的回忆
+title: 我的歌单
 published: 2025-09-15
-description: 本文讲述了我在听音乐的时候听到了我玩的游戏。
+description: 本文讲述了我在听音乐的时候听到了我玩的游戏的主题曲。
 tags:
   - 游戏
   - 音乐
