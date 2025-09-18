@@ -28,7 +28,7 @@ lang: zh_CN
 
 ![codm-2024-s2](https://github.com/MCKero6423/picx-images-hosting/raw/master/codm-2024-S2.60ultit9gf.webp)
 
-#暗区
+# 暗区
 
 ## 暗区突围S14主题曲
 
