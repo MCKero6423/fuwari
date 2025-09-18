@@ -22,3 +22,9 @@ lang: zh_CN
 
 # 使命召唤￼
 无畏战士￼[链接](http://music.163.com/song/media/outer/url?id=2601211314.mp3)
+
+#暗区
+
+## 暗区突围S14主题曲
+
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV1vHpgztExD&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
