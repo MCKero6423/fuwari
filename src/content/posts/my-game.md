@@ -26,7 +26,7 @@ lang: zh_CN
 
 <iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV1bv4y157HX&p=36" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-![codm-2024-s2](https://github.com/MCKero6423/picx-images-hosting/raw/master/codm-2024-S2.60ultit9gf.webp)
+![codm-2024-s2](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/codm-2024-S2.60ultit9gf.webp)
 
 # 暗区
 
