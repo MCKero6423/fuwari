@@ -20,7 +20,7 @@ lang: zh_CN
 - 硬盘
 - 云储存（云盘，网易云音乐）
 
-# 使命召唤￼
+# 使命召唤
 无畏战士[链接](http://music.163.com/song/media/outer/url?id=2601211314.mp3)
 2024 S2-「游龙剑影」
 
