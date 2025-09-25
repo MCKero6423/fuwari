@@ -28,31 +28,31 @@ lang: zh_CN
 
 把压缩包wget下来(用curl也行)
 
-``` 
+```shell
 wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.16.4.tar.xz
 ```
 
 #### 解压
 把下载下来的压缩包进行解压
-```
+```shell
 tar -xf inux-6.16.4.tar.xz
 ```
 
 #### 配置内核
 先cd到对应目录
-```
+```shell
 cd inux-6.16.4
 ```
 我就直接使用默认配置了。如果需要可以调整配置。
-```
+```shell
 make  defconfig
 ```
 使用编译命令。(-j是要使用多少个核心)
-```
+```shell
 make -j4
 ``` 
 等待编译完成后会提示内核的输出路径，我编译的是x86的。
-```
+```shell
 linux-6.16.4/arch/x86/boot/bzImage
 ```
 
@@ -66,19 +66,19 @@ linux-6.16.4/arch/x86/boot/bzImage
 选择Download Source接着，滑到最底下找到1.37.0版本(大约2mb左右,那些大小太少的好像是用来校验的,你要是想也可以全下载下来一个一个找😆)
 
 ![busybox-download](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/busybox-download.mf9b4p68.webp)
-```
+```shell
 wget https://busybox.net/downloads/busybox-1.37.0.tar.bz2
 ```
 
 #### 解压busybox
 还是老生常谈的解压
-```
+```shell
 tar -xf busybox-1.37.0.tar.bz2
 ```
 
 #### 配置busybox
 解压完后cd进对应目录，配置busybox，由于我们这个系统简直就是一个毛坯房，几乎啥都没有，所以说要用静态编译。先去配置一下。
-```
+```shell
 make menuconfig
 ```
 进到settings(按enter)找到Build Busybox as a static binary(no shared libs)按空格选择，按→选Exit
@@ -87,25 +87,25 @@ make menuconfig
 
 #### 编译busybox
 配置完后就开始编译
-```
+```shell
 make -j 2
 ```
 编译完成后，在你的工作目录创建一个临时目录
-```
+```shell
 mkdir busybox
 ```
 然后
-```
+```shell
 make install CONFIG_PREFIX=../busybox
-```
+```shell
 #### 编辑img文件
 使用dd命令创建一个全都是0的文件
-```
+```shell
 dd if=/dev/zero of=Linux.img bs=1M count=512)
-```
+```shell
 给img文件分区
 
-```
+```shell
 gdisk Linux.img
 ```
 输入n，后面两个按空格，最后一个输入50MB，guid填写EF00(注意大小写)
@@ -115,82 +115,82 @@ gdisk Linux.img
 #### 挂载
 先使用losetup将一个文件或设备与一个回环设备（loop device）进行关联。
 
-```
+```shell
 sudo losetup -f -P Linux.img
 ```
 lsblk查看
 
-```
+```shell
 lsblk
 ```
 找到Linux的loop，我这边是loop0里面有loop0p1，loop0p1。
 
 loop0p1
-```
+```shell
 sudo mkfs.fat -F32 /dev/loop0p1
 ```
 loop0p2
-```
+```shell
 sudo mkfs.exit4 /dev/loop0p2
 ```
 在工作目录创建一个mnt文件夹
-```
+```shell
 mkdir mnt
 ```
 挂载loop0p1
-```
+```shell
 sudo mount /dev/loop0p1 mnt
 ```
 #### 创建 EFI
-```
+```shell
 sudo grub-install --target=x86_64-efi --efi-directory=$(realpath mnt) --bootloader-id=GRUB --removable --recheck
 ```
 查看mnt里面的文件，应该会有一个叫做EFI的文件夹
-```
+```shell
 ls mnt
 ```
 创建一个在mnt/BOOT/grub的文件夹
-```
+```shell
 mkdir -p mnt/boot/grub
 ```
 复制文件
-```
+```shell
 cp mnt/BOOT/grub.cfg /mnt/boot/grub
 ```
 查看loop0p2的id
-```
+```shell
 blkid /dev/loop0p2
 ```
 把UUID物复制下来，替换mnt/boot/grub/grub.cfg中的UUID，然后把修改后的文件直接复制替换到mnt/EFI/BOOT/grub.cfg
 
 回到mnt的上一层，解除挂载。
-```
+```shell
 sudo umount mnt
 ```
 
 #### 给系统搞个根目录
 先挂载 loop0p2
-```
+```shell
 sudo mount /dev/loop0p2 mnt
 ```
 复制内核文件到mnt
-```
+```shell
 sudo cp linux-6.16.4/arch/x86/boot/bzImage mnt
 ```
 把busybox编译出来的二进制文件移到对应目录
-```
+```shell
 sudo cp -r busybox/* mnt
 ```
 cd到mnt
-``` 
+``` shell
 cd mnt
 ```
 创建boot文件夹
-```
+```shell
 mkdir boot
 ```
 创建其他需要的目录(有些文件创建来就是空着的，方便后期不用创建，比如说包管理器就要用etc文件夹
-```
+```shell
 mkdir proc
 
 mkdir sys
@@ -198,33 +198,33 @@ mkdir sys
 mkdir etc
 ```
 把bzImage文件移动到boot文件夹
-```
+```shell
 sudo mv bzImage boot/
 ```
 跳转boot目录，ls检查一下
-```
+```shell
 cd boot
 
 ls
 ```
 如果没有问题就能看到bzImage文件
-```
+```shell
 bzImage
 ```
 创建grub文件夹
-```
+```shell
 mkdir grub
 ```
 cd到grub
-```
+```shell
 cd grub
 ```
 创建一个文件叫grub.cfg
-```
+```shell
 vim grub.cfg
 ```
 里面的内容按这个填
-```
+```shell
 menuentry "Unics_MCKero" {
     insmod part_gpt
     insmod fat
@@ -237,7 +237,7 @@ menuentry "Unics_MCKero" {
 Unics_MCKero这个是你的引导程序的名字可以修改(尽量使用英文，我不知道用特殊字符或者中文会不会不兼容)
 
 执行这个查看loop0p2的UUID
-```
+```shell
 blkid /dev/loop0p2
 ```
 mnt/boot/grub.cfg里面的set=root 这个后面填写loop0p2的UUID
@@ -245,15 +245,15 @@ mnt/boot/grub.cfg里面的set=root 这个后面填写loop0p2的UUID
 PARTUUID这里填写blkid /dev/loop0p2输出的PARTUUID，然后保存
 
 跳转到mnt的boot目录(因为我在mnt的boot/grub目录所以说我就直接使用直接返回上一层）
-```
+```shell
 cd ..
 ```
 创建一个名为init的文件
-```
+```shell
 vim init
 ```
 内容就写这个
-```
+```shell
 #!/bin/sh
 
 mount -t sysfs none /sys
@@ -263,7 +263,7 @@ mount -t devtmpfs devtmpfs /dev
 exec /bin/sh
 ```
 给init执行权限(一定要给,如果没给系统运行不了)
-```
+```shell
 chmod +x init
 ```
 #### 网络
@@ -272,11 +272,11 @@ chmod +x init
 先到这个项目的仓库[ifupdown-ng的github仓库](https://github.com/ifupdown-ng/ifupdown-ng)这是一个用c语言编写的项目，比较轻量，它可以用来管理网络设备。
 
 我们先把他的仓库克隆下来
-```
+```shell
 git clone  https://github.com/ifupdown-ng/ifupdown-ng.git
 ```
 跳转进仓库
-```
+```shell
 cd ifupdown-ng
 ```
 因为我们的小系统没有依赖库，所以说我们需要静态编译这个程序。
