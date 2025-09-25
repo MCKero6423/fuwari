@@ -224,7 +224,7 @@ cd grub
 vim grub.cfg
 ```
 里面的内容按这个填
-```shell
+```shell title="grub.cfg"
 menuentry "Unics_MCKero" {
     insmod part_gpt
     insmod fat
@@ -280,25 +280,25 @@ git clone  https://github.com/ifupdown-ng/ifupdown-ng.git
 cd ifupdown-ng
 ```
 因为我们的小系统没有依赖库，所以说我们需要静态编译这个程序。
-```
+```shell
 LDFLAGS="-static" make
 ```
 把编译出来的文件复制到mnt/bin里面
-```
+```shell
 cp ./ifupdown-ng/if* mnt/bin
 ```
 记得给这些文件执行的权限
 
 在mnt文件夹中创建一个叫etc的文件夹再往里面创建一个叫做network的文件夹。
-```
+```shell
 sudo mkdir -p mnt/etc/network
 ```
 在mnt/etc/network中创建一个文件，名字叫interfaces
-```
+```shell
 vim mnt/etc/network/interfaces
 ```
 里面的内容填这个
-```
+```shell
 auto lo
 iface lo inet loopback
 
@@ -306,15 +306,15 @@ auto eth0
 iface eth0 inet dhcp
 ```
 创建一个文件夹在mnt/etc/usr/share/名称叫udhcpc
-```
+```shell
 mkdir -p mnt/etc/usr/share/udhcpc
 ```
 在udhcpc文件夹中创建一个文件叫default.script
-```
+```shell
 sudo vim mnt/etc/usr/share/udhcpc/default.script
 ```
 里面填写这个
-```
+```shell title="default.script"
 #!/bin/sh
 [ -n "$ip" ] && ip addr add $ip/$subnet dev $interface
 [ -n "$router" ] && ip route add default via $router
@@ -323,17 +323,17 @@ sudo vim mnt/etc/usr/share/udhcpc/default.script
 记得保存
 
 给default.script可执行权限
-```
+```shell
 chmod +x default.script
 ```
 到时候在虚拟机或者实体机直接输入
-```
+```shell
 ifup lo
 
 ifup eth0
 ```
 验证是不是得到了IP地址
-```
+```shell
 ip a
 ```
 如果eth0有ip那就是配置好了，可以ping baidu.com试一试。
@@ -348,15 +348,15 @@ ip a
 访问[apk-tools的仓库](https://gitlab.alpinelinux.org/alpine/apk-tools)找到release在Other下方有很多apk.static括号里面跟着指令集版本，比如，x86，x86_64和其他的，选择自己内核的指令集（我的是x86）所以说我选apk.static(x86)。
 
 把apk.static下载下来
-```
+```shell
 wget https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic//v2.14.10/x86/apk.static
 ```
 跳转到mnt
-```
+```shell
 cd mnt
 ```
 创建以下目录（一个一个执行）
-```
+```shell
 mkdir -p /etc/apk/keys
 
 mkdir -p /var/lib/apk
@@ -368,20 +368,20 @@ mkdir -p /var/lock
 把apk.static命名为apk，然后移动到mnt/bin  给apk可执行权限。
 
 在/etc/apk创建一个repositories文件
-```
+```shell title="repositories"
 vim /etc/apk/repositories
 ```
 里面填写这两个网址
-```
+```shell
 http://dl-cdn.alpinelinux.org/alpine/latest-stable/main
 http://dl-cdn.alpinelinux.org/alpine/latest-stable/community
 ```
 下载key文件
-```
+```shell
 git clone https://gitlab.alpinelinux.org/alpine/aports --depth 1
 ```
 跳转到aports
-```
+```shell
 cd aports/main/alpine-keys
 ```
 把这些.rsa.pub文件全复制到mnt/etc/apk/keys
