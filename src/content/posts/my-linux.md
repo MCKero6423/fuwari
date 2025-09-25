@@ -97,12 +97,12 @@ mkdir busybox
 然后
 ```shell
 make install CONFIG_PREFIX=../busybox
-```shell
+```
 #### 编辑img文件
 使用dd命令创建一个全都是0的文件
 ```shell
 dd if=/dev/zero of=Linux.img bs=1M count=512)
-```shell
+```
 给img文件分区
 
 ```shell
