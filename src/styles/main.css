@@ -140,3 +140,68 @@
 .collapsed {
     height: var(--collapsedHeight);
 }
+
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background: var(--btn-regular-bg);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    background: var(--btn-regular-bg-hover);
+}
+
+.copy-btn:active {
+    background: var(--btn-regular-bg-active);
+    transform: scale(0.95);
+}
+
+.copy-btn-icon {
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+}
+
+.copy-btn-icon svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: var(--btn-content);
+    transition: opacity 0.2s ease;
+}
+
+.copy-icon {
+    opacity: 1;
+}
+
+.success-icon {
+    opacity: 0;
+    fill: var(--primary);
+}
+
+/* 成功状态 */
+.copy-btn.success .copy-icon {
+    opacity: 0;
+}
+
+.copy-btn.success .success-icon {
+    opacity: 1;
+}
+
+/* 确保在 hover 时显示 */
+.frame:hover .copy-btn {
+    opacity: 1;
+}
