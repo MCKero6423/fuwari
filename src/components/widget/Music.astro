@@ -13,8 +13,54 @@ const style = Astro.props.style
 
 const isCollapsed = false
 ---
+
 <WidgetLayout name="音乐" id="music" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-1 music-widget-container">
         <APlayer client:only="svelte"/>
     </div>
 </WidgetLayout>
+
+<script>
+// 页面切换时的清理工作
+function cleanupMusicPlayer() {
+  if (window.musicPlayerInstance) {
+    try {
+      window.musicPlayerInstance.destroy();
+      console.log('页面切换时清理播放器');
+    } catch (e) {
+      console.log('清理播放器时出错:', e);
+    }
+    window.musicPlayerInstance = null;
+  }
+}
+
+// Astro 页面切换事件
+document.addEventListener('astro:before-preparation', cleanupMusicPlayer);
+document.addEventListener('astro:before-swap', cleanupMusicPlayer);
+
+// 如果使用了 Swup
+if (typeof window !== 'undefined' && window.swup) {
+  window.swup.hooks.on('content:replace', cleanupMusicPlayer);
+}
+
+// 页面卸载时清理
+window.addEventListener('beforeunload', cleanupMusicPlayer);
+</script>
+
+<style>
+.music-widget-container {
+  overflow: hidden;
+  position: relative;
+}
+
+/* 防止音乐播放器影响整体布局 */
+.music-widget-container :global(.aplayer) {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.music-widget-container :global(.aplayer-list) {
+  position: relative !important;
+  z-index: 10;
+}
+</style>
