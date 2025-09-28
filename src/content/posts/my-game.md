@@ -22,7 +22,14 @@ lang: zh_CN
 - B站视频
 
 # 使命召唤
-无畏战士[链接](http://music.163.com/song/media/outer/url?id=2601211314.mp3)
+无畏战士
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2601211314&auto=0&height=66"></iframe>
+
+使命之战
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2015546904&auto=0&height=66"></iframe>
+
 2024 S2-「游龙剑影」
 
 <iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV1bv4y157HX&p=36" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
