@@ -44,7 +44,8 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-  LinkPreset.Series,
+        LinkPreset.Series,
+		LinkPreset.Friends,
 		LinkPreset.About,
 		{
 			name: "状态",
