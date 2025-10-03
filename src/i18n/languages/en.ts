@@ -36,4 +36,5 @@ export const en: Translation = {
 	[Key.publishedAt]: "Published at",
 	[Key.license]: "License",
  [Key.series]: 'Series',
+ [Key.friends]: 'Friendly link',
 };
