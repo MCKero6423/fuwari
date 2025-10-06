@@ -10,15 +10,20 @@ const currentYear = new Date().getFullYear();
     <div class="transition text-50 text-sm text-center">
         &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a> /
-        <!-- 这里是修改后的部分 -->
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a>
+
+        <!-- 在 Sitemap 后面添加第一个换行符 -->
+        <br>
+
         <span class="transition text-[var(--primary)] font-medium">
             萌ICP备20250659号
         </span>
+
+        <!-- 在备案号后面添加第二个换行符 -->
         <br>
+
         Powered by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
     </div>
 </div>
-
