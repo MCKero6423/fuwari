@@ -101,7 +101,7 @@ html.dark {
   }
 
   a {
-    @apply link link-underline text-[var(--primary)] font-medium;
+    @apply cursor-pointer hover:underline text-[var(--primary)] font-medium;
   }
 
   .tk-ruser {
