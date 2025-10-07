@@ -372,6 +372,18 @@ function showBanner() {
 	banner.classList.remove('opacity-0', 'scale-105');
 }
 
+// 专用于创建loadComment的事件，即通知评论组件进行一次加载
+
+function initCommentComponent() {
+
+  const event = new Event("loadComment");
+
+  document.dispatchEvent(event);
+
+}
+
+// twikoo评论
+
 function init() {
 	// disableAnimation()()		// TODO
 	loadTheme();
