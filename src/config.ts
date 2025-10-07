@@ -103,6 +103,6 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 
 export const commentConfig: CommentConfig = {
   twikoo: {
-    envId: 'https://twikoo.mckero.com/',
+    envId: 'https://twikoo.mckero.com/.netlify/functions/twikoo',
   },
 }
