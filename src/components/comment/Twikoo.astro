@@ -13,7 +13,23 @@ const config = {
 ---
 
 <div id="tcomment"></div>
-<script is:inline src="https://cdn.staticfile.org/twikoo/1.6.44/twikoo.all.min.js"></script>
-<script is:inline define:vars={{ config }}>
-  twikoo.init(config)
+<script define:vars={{ config }}>
+function loadTwikoo() {
+
+  // 动态加载 Twikoo 脚本，并在加载完成后执行 twikoo.init
+
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js';
+  script.defer = true;
+  script.onload = () => {
+    if (window.twikoo) {
+      window.twikoo.init(config);
+    }
+  };
+  // script.onerror = () => {
+  //   console.error('Twikoo script load failed');
+  // };
+  document.body.appendChild(script);
+}
+  document.addEventListener("loadComment", loadTwikoo, { once: true }); // 监听加载评论事件，但是我们只能监听一次，从而避免多次触发。
 </script>

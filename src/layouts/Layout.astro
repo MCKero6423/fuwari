@@ -378,6 +378,7 @@ function init() {
 	loadHue();
 	initCustomScrollbar();
 	showBanner();
+	initCommentComponent();  // 调用initCommentComponent()函数，twikoo
 }
 
 /* Load settings when entering the site */
@@ -413,7 +414,15 @@ const setup = () => {
 			navbar.classList.add('navbar-hidden')
 		}
 	})
-	window.swup.hooks.on('content:replace', initCustomScrollbar)
+	// window.swup.hooks.on('content:replace', initCustomScrollbar)
+
+  window.swup.hooks.on("content:replace", () => {
+
+    initCustomScrollbar();
+
+    initCommentComponent(); // 添加代码调用
+
+  });
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
