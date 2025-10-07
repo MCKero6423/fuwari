@@ -1,5 +1,6 @@
 import type {
 	ExpressiveCodeConfig,
+	CommentConfig,
 	LicenseConfig,
 	NavBarConfig,
 	ProfileConfig,
@@ -99,3 +100,9 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
 };
+
+export const commentConfig: CommentConfig = {
+  twikoo: {
+    envId: 'https://twikoo.mckero.com/',
+  },
+}
