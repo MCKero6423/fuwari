@@ -90,16 +90,15 @@ html.dark {
   }
 }
 
-/* Content & Preview */
+/* Content & Preview - 关键修复部分 */
 .tk-content,
 .tk-preview-container {
-  /* by @microsic
-    Make the picture type emoticons display without wrapping
-  */
+  /* 图片表情显示优化 */
   img {
     @apply inline !align-bottom;
   }
 
+  /* 链接样式 */
   a {
     @apply cursor-pointer hover:underline text-[var(--primary)] font-medium;
   }
@@ -108,12 +107,54 @@ html.dark {
     @apply no-underline;
   }
 
-  :not(pre) > code {
-    @apply bg-[var(--inline-code-bg)] rounded-md text-[--inline-code-color] px-1 py-0.5 font-semibold;
+  /* 行内代码样式 - 修复：移除了可能冲突的选择器 */
+  code:not(pre code) {
+    @apply bg-[var(--inline-code-bg)] rounded-md px-1 py-0.5 font-semibold;
+    color: var(--inline-code-color);
   }
 
-  li {
-    @apply before:content-['•'] before:text-[var(--primary)];
+  /* 列表样式 - 修复：使用更具体的选择器，避免影响其他元素 */
+  ul > li::marker {
+    content: '•';
+    color: var(--primary);
+  }
+  
+  ol > li::marker {
+    color: var(--primary);
+  }
+
+  /* 保留 Twikoo 原生的 Markdown 渲染 */
+  p {
+    margin: 0.5em 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0.75em 0 0.5em 0;
+    font-weight: 600;
+  }
+
+  blockquote {
+    margin: 0.5em 0;
+    padding-left: 1em;
+    border-left: 4px solid rgba(144, 147, 153, 0.3);
+    color: var(--tk-text);
+    opacity: 0.9;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid rgba(144, 147, 153, 0.3);
+    padding: 0.5em;
+  }
+
+  th {
+    background-color: var(--btn-regular-bg);
+    font-weight: 600;
   }
 }
 
@@ -129,6 +170,7 @@ html.dark {
   }
 }
 
+/* Code block 代码块样式 */
 .twikoo .code-block {
   pre {
     @apply !rounded-xl;
@@ -150,9 +192,7 @@ html.dark {
   @apply hover:rounded-lg mt-1 hover:bg-[var(--btn-plain-bg-hover)];
 }
 
-/* by @SirTamago 
-Make the emoji component display correctly when there are too many emoji packs
-*/
+/* Emoji 组件显示修复 */
 .card-base {
   overflow: visible;
 }
