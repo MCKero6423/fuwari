@@ -11,6 +11,18 @@ series: "逆向"
 
 ### **虚拟世界的后门：深度剖析基于.pak文件的作弊原理与实现**
 
+# Disclaimer and Important Warning
+
+This article aims to provide an in-depth analysis of the internal workings of modified game clients purely from the perspective of technical research and cybersecurity education. All content in this article is intended solely for learning, discussion, and revealing potential risks, with the goal of enhancing readers' security awareness and understanding of underlying game technologies.The author strongly condemns and firmly opposes any form of game cheating. Creating, distributing, or using game cheats not only severely undermines the fairness of the gaming environment but also greatly harms both one's own and others' gaming experience. Additionally, installing modified applications from unknown sources poses significant security risks to your personal devices, including but not limited to account theft, personal privacy leaks, malware infections, and financial loss.Please adhere to the user agreements of game developers and maintain a healthy and fair gaming environment. Under no circumstances should the technical methods described in this article be used for illegal or destructive purposes. Any subsequent actions and consequences resulting from reading this article are the sole responsibility of the individual involved and have no relation to the author of this article.
+
+# 免责声明与重要警告
+
+本文旨在从纯粹的技术研究与网络安全教育角度，深入剖析游戏修改版客户端的内部工作原理。本文的一切内容仅用于学习、交流和揭示其潜在风险，目的在于提升读者的安全意识和对游戏底层技术的理解。
+
+笔者强烈谴责并坚决反对任何形式的游戏作弊行为。制作、传播或使用游戏外挂不仅严重破坏了游戏的公平竞技环境，更是对自己和他人的游戏体验的极大伤害。此外，安装来源不明的修改版应用程序会给您的个人设备带来极高的安全风险，包括但不限于账号被盗、个人隐私泄露、设备感染恶意软件、财产损失等。
+
+请遵守游戏开发商的用户协议，维护绿色健康的游戏环境。切勿尝试文中所述的任何技术手段用于非法或破坏性目的。因阅读本文而产生的一切后续行为及后果，由行为人自行承担，与本文作者无关。
+
 #### **引言**
 
 在网络游戏的攻防战场上，对客户端资源的篡改是最古老、最直接的攻击手段之一。`.pak`资源包，作为现代游戏引擎封装海量数据的基础设施，其设计的初衷是为了性能与管理，但其封装的特性也使其成为了一个极具诱惑力的攻击目标。本文将不再泛泛而谈，而是直接深入技术细节，详细阐述攻击者是如何一步步突破防线，利用`.pak`文件实现各种作弊功能的。
