@@ -9,6 +9,10 @@ lang: "zh_CN"
 series: "逆向"
 ---
 
+# Disclaimer and Important Warning
+
+This article aims to provide an in-depth analysis of the internal workings of modified game clients purely from the perspective of technical research and cybersecurity education. All content in this article is intended solely for learning, discussion, and revealing potential risks, with the goal of enhancing readers' security awareness and understanding of underlying game technologies.The author strongly condemns and firmly opposes any form of game cheating. Creating, distributing, or using game cheats not only severely undermines the fairness of the gaming environment but also greatly harms both one's own and others' gaming experience. Additionally, installing modified applications from unknown sources poses significant security risks to your personal devices, including but not limited to account theft, personal privacy leaks, malware infections, and financial loss.Please adhere to the user agreements of game developers and maintain a healthy and fair gaming environment. Under no circumstances should the technical methods described in this article be used for illegal or destructive purposes. Any subsequent actions and consequences resulting from reading this article are the sole responsibility of the individual involved and have no relation to the author of this article.
+
 ## **免责声明与重要警告**
 
 **本文旨在从纯粹的技术研究与网络安全教育角度，深入剖析游戏修改版客户端的内部工作原理。本文的一切内容仅用于学习、交流和揭示其潜在风险，目的在于提升读者的安全意识和对游戏底层技术的理解。**
