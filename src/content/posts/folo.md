@@ -1,14 +1,14 @@
 ---
 title: 认证为Folo的创作者
-published: 
-description: 'Folo是一个RSS聚合平台'
+published: 2025-11-09
+description: '认证Folo这个个RSS聚合平台'
 tags: [Folo]
-category: '记录'
+category: '认证'
 draft: false 
-lang: ''
+lang: zh_CN
 ---
 
-# 这是啥？
+# 这是什么？
 
 这是一篇Folo认证文章，用于认证本RSS归属于我
 
