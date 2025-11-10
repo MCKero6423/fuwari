@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["MiSans VF", "HarmonyOS Sans SC", ...defaultTheme.fontFamily.sans],
+        sans: ["Roboto", "sans-serif", ...defaultTheme.fontFamily.sans],
       },
     },
   },
