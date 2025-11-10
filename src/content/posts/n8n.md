@@ -15,7 +15,7 @@ lang: zh_CN
 # 部署
 那我们要怎样才能部署n8n呢？我选择的是[Zeabur](https://zeabur.com/)
 ## 什么是Zeabur?
-[Zeabur文档](https://zeabur.com/docs/zh-CN))的官方文档是这样介绍的
+[Zeabur文档](https://zeabur.com/docs/zh-CN)的官方文档是这样介绍的
 **Zeabur** 是一个可以帮助你部署服务的平台，无论你使用什么编程语言或开发框架，你都只需要通过几个简单的按钮进行部署。
   而且，Zeabur还采用按量计费，我们只需要为我们的服务实际用到的资源付费。
 
