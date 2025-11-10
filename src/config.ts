@@ -62,7 +62,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/image.2vf5ycylo3.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "MC_Kero",
 	bio: "依稀当年泪目干！",
 	links: [
