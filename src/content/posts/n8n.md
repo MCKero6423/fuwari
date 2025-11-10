@@ -9,7 +9,6 @@ category: 部署
 draft: false
 series: 部署
 lang: zh_CN
-image: https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/image.54y6hsblo7.webp
 ---
 # 从零开始部署n8n
   **n8n** 是一个开源的、功能强大的工作流自动化工具，允许用户通过可视化方式连接不同的应用程序和服务。它结合了 **AI 功能** 和 **业务流程自动化**，帮助开发者和非技术人员创建复杂的工作流，实现数据在不同系统间的自动传输和处理。
