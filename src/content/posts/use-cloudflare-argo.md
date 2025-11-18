@@ -23,10 +23,14 @@ lang: zh_CN
   :::info[提示]
   我的博客[blog.mckero.com](https://blog.mckero.com/)在2025年11月到12月15日左右应该都是启用cloudflare argo smart routing的。
 
+# cloudflare argo smart routing的订阅费用
+cloudflare argo smart routing的订阅费用还是有点小贵的，它是用流量计费的。
+![](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/image.73udk1d0th.webp)
+但是如果你的网站的流量很多的话，那账单就很贵，但是如果没什么流量的话，cloudflare argo smart routing又学习不到什么（就是效果不好）所以还是建议买Pro。
 # cloudflare argo smart routing测试TTFB和ip
   效果可能不是很好，因为我的源站就在cloudflare pages，cloudflare argo smart routing的主要效果就是减少TTFB，我现在关闭cloudflare argo smart routing测试一下TTFB。我先是用curl测试。
   这是我用ai生成的命令。
-```
+```bash
 echo "=== IPv4 测试 ===" && \
 curl -4 -w "\n性能指标 (IPv4):\n状态码: %{http_code}\nTTFB: %{time_starttransfer}s\nDNS: %{time_namelookup}s\nTCP: %{time_connect}s\nTLS: %{time_appconnect}s\n总时间: %{time_total}s\n速度: %{speed_download} B/s\n大小: %{size_download} bytes\n远程IP: %{remote_ip}:%{remote_port}\n" \
   -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" \
@@ -41,7 +45,7 @@ curl -6 -w "\n性能指标 (IPv6):\n状态码: %{http_code}\nTTFB: %{time_startt
   https://blog.mckero.com/
 ```
 这是测试结果（广东深圳移动，没开cloudflare argo smart routing）
-```
+```text
 === IPv4 测试 ===
 
 性能指标 (IPv4):
@@ -69,7 +73,7 @@ TLS: 1.054573s
 远程IP: 2606:4700:3031::ac43:97f0:443
 ```
 广东深圳电信（没开cloudflare argo smart routing）这网没有ipv6
-```
+```text
 === IPv4 测试 ===
 
 性能指标 (IPv4):
@@ -123,7 +127,7 @@ ipv4效果明显好一点，ipv6差不多。
 ## 开启cloudflare argo smart routing的后TTFB
 首先curl测试
 广东深圳移动
-```
+```text
 === IPv4 测试 ===
 
 性能指标 (IPv4):
@@ -157,7 +161,7 @@ TLS: 0.885486s
 # cloudflare argo smart routing智能吗？
 用curl -I测试
 广东深圳移动
-```
+```bash
 ~ $ curl -I https://blog.mckero.com
 HTTP/2 200
 date: Tue, 18 Nov 2025 09:25:38 GMT
