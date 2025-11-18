@@ -190,3 +190,6 @@ alt-svc: h3=":443"; ma=86400
   cloudflare argo smart routing的效果就提现出来了，比如，源站在美国而用户在中国。
 # 结语
  由此可见cloudflare argo smart routing效果是分场景的。如果你买Pro的话呢，可以买上这个试一试。效果可能更好。(我的博客流量太少了)
+
+# 2025年11月18日
+  就在我写完这篇文章，刚提交上去没多久，结果cloudflare就炸掉了。我所有托管到cloud flare的服务都用不了。就连cloudflare argo smart routing也没有用。
