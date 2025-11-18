@@ -20,7 +20,7 @@ lang: zh_CN
 # cloudflare argo smart routing有什么作用？
   [blog.cloudflare.com](https://blog.cloudflare.com/zh-cn/argo-and-the-cloudflare-global-private-backbone/)上说：“启用Argo智能路由可以**平均减少33％**的HTTP第一个字节到达时间（TTFB）。”并且还可以优化回源速度（从cdn到源服务器的速度）
   
-  :::info[提示]
+  :::tip[提示]
   我的博客[blog.mckero.com](https://blog.mckero.com/)在2025年11月到12月15日左右应该都是启用cloudflare argo smart routing的。
   :::
 
