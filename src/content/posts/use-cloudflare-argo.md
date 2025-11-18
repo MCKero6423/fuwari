@@ -22,9 +22,10 @@ lang: zh_CN
   
   :::info[提示]
   我的博客[blog.mckero.com](https://blog.mckero.com/)在2025年11月到12月15日左右应该都是启用cloudflare argo smart routing的。
+  :::
 
 # cloudflare argo smart routing的订阅费用
-cloudflare argo smart routing的订阅费用还是有点小贵的，它是用流量计费的。
+<font color="red">cloudflare argo smart routing的订阅费用还是有点很贵的，它是用流量计费的！</font>
 ![](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/image.73udk1d0th.webp)
 但是如果你的网站的流量很多的话，那账单就很贵，但是如果没什么流量的话，cloudflare argo smart routing又学习不到什么（就是效果不好）所以还是建议买Pro。
 # cloudflare argo smart routing测试TTFB和ip
