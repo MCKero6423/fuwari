@@ -13,3 +13,11 @@
 - 感谢我的朋友马哥
 
 - 感谢我的朋友侯哥
+
+# AbuseIPDB Contributor Badge
+
+<div style="display: flex; justify-content: center; margin-bottom: 20px;">
+  <a href="https://www.abuseipdb.com/user/250199" title="AbuseIPDB is an IP address blacklist for webmasters and sysadmins to report IP addresses engaging in abusive behavior on their networks" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">
+    <img src="https://www.abuseipdb.com/contributor/250199.svg" alt="AbuseIPDB Contributor Badge" style="width: 305px; max-width: 100%;">
+  </a>
+</div>
