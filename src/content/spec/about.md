@@ -16,8 +16,14 @@
 
 # AbuseIPDB Contributor Badge
 
-<div style="display: flex; justify-content: center; margin-bottom: 20px;">
-  <a href="https://www.abuseipdb.com/user/250199" title="AbuseIPDB is an IP address blacklist for webmasters and sysadmins to report IP addresses engaging in abusive behavior on their networks" target="_blank" rel="noopener" referrerpolicy="no-referrer-when-downgrade">
-    <img src="https://www.abuseipdb.com/contributor/250199.svg" alt="AbuseIPDB Contributor Badge" style="width: 305px; max-width: 100%;">
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+  <a href="https://www.abuseipdb.com/user/250199" 
+     title="AbuseIPDB is an IP address blacklist for webmasters and sysadmins to report IP addresses engaging in abusive behavior on their networks" 
+     target="_blank" 
+     rel="noopener" 
+     referrerpolicy="no-referrer-when-downgrade">
+    <img src="https://www.abuseipdb.com/contributor/250199.svg" 
+         alt="AbuseIPDB Contributor Badge" 
+         style="width: 285px; max-width: 100%; border-radius: 5px; border-top: 5px solid #058403; border-right: 5px solid #111; border-bottom: 5px solid #111; border-left: 5px solid #058403; padding: 5px; box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, .2); pointer-events: none;">
   </a>
 </div>
