@@ -5,9 +5,9 @@ description: cloudflare在中国大陆的访问速度太慢了，我看到cloudf
 tags:
   - cloudflare
   - cloudflareArgo智能路由
-category: cloudlfare
+category: cloudflare
 draft: false
-series: cloudlfare
+series: cloudflare
 lang: zh_CN
 ---
 # 什么是cloudflare argo smart routing？
