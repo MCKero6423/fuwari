@@ -56,12 +56,12 @@ const config = profileConfig;
             // 第一步：获取网站ID和token
             const shareResponse = await fetch(`${umamiConfig.baseUrl}/api/share/${umamiConfig.shareId}`);
             if (!shareResponse.ok) {
-                throw new Error('获取分享信息失败');
+                throw new Error(`获取分享信息失败: ${shareResponse.status}`);
             }
             const shareData = await shareResponse.json();
             const { websiteId, token } = shareData;
             
-            // 第二步：获取全站统计数据（不指定url参数获取全站数据）
+            // 第二步：获取全站统计数据（不指定path参数获取全站数据）
             const currentTimestamp = Date.now();
             const statsUrl = `${umamiConfig.baseUrl}/api/websites/${websiteId}/stats?startAt=0&endAt=${currentTimestamp}&unit=hour&timezone=${encodeURIComponent(umamiConfig.timezone)}&compare=false`;
             
@@ -72,11 +72,12 @@ const config = profileConfig;
              });
             
             if (!statsResponse.ok) {
-                throw new Error('获取统计数据失败');
+                throw new Error(`获取统计数据失败: ${statsResponse.status}`);
             }
             
             const statsData = await statsResponse.json();
-            const pageviews = statsData.pageviews?.value || 0;
+            // Umami v2/v3 兼容
+            const pageviews = statsData.pageviews || 0;
             
             const statsElement = document.getElementById('site-stats');
             if (statsElement) {

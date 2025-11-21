@@ -12,65 +12,56 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "MC_Kero blog",
 	subtitle: "MC_Kero的博客,有时候会写点文章",
-	lang: "zh_CN", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
+	lang: "zh_CN",
 	themeColor: {
-		hue: 355, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
-		fixed: false, // Hide the theme color picker for visitors
+		hue: 355,
+		fixed: false,
 	},
 	banner: {
 		enable: false,
-		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
+		src: "assets/images/demo-banner.png",
+		position: "center",
 		credit: {
-			enable: false, // Display the credit text of the banner image
-			text: "", // Credit text to be displayed
-			url: "", // (Optional) URL link to the original artwork or artist's page
+			enable: false,
+			text: "",
+			url: "",
 		},
 	},
 	toc: {
-		enable: true, // Display the table of contents on the right side of the post
-		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
+		enable: true,
+		depth: 2,
 	},
-	favicon: [
-		// Leave this array empty to use the default favicon
-		// {
-		//   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
-		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
-		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
-		// }
-	],
+	favicon: [],
 };
 
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-        LinkPreset.Series,
+		LinkPreset.Series,
 		LinkPreset.Friends,
 		LinkPreset.About,
 		{
 			name: "状态",
-      url: "https://status.mckero.com", // Internal links should not include the base path, as it is automatically added
-      external: true, // Show an external link icon and will open in a new tab
+			url: "https://status.mckero.com",
+			external: true,
 		},
 		{
-      name: "统计",
-      url: "https://umami.mckero.com/share/v4wXkxwCYns2ypLN/blog.mckero.com", // Internal links should not include the base path, as it is automatically added
-      external: true, // Show an external link icon and will open in a new tab
-      },
+			name: "统计",
+			url: "https://umami.mckero.com/share/v4wXkxwCYns2ypLN/blog.mckero.com",
+			external: true,
+		},
 	],
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "assets/images/demo-avatar.png",
 	name: "MC_Kero",
 	bio: "依稀当年泪目干！",
 	links: [
 		{
 			name: "Github",
-			icon: "fa6-brands:github", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
-			// `pnpm add @iconify-json/<icon-set-name>`
+			icon: "fa6-brands:github",
 			url: "https://github.com/MCKero6423",
 		},
 		{
@@ -78,7 +69,6 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa6-brands:bilibili",
 			url: "https://space.bilibili.com/3493260722964658",
 		},
-		
 	],
 };
 
@@ -90,19 +80,17 @@ export const licenseConfig: LicenseConfig = {
 
 export const umamiConfig: UmamiConfig = {
 	enable: true,
-	baseUrl: "https://umami.mckero.com",
+	baseUrl: "https://umami.mckero.com",  // 自部署版本，不需要加 /analytics/us
 	shareId: "v4wXkxwCYns2ypLN",
 	timezone: "Asia/Shanghai",
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
-	// Note: Some styles (such as background color) are being overridden, see the astro.config.mjs file.
-	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
 };
 
 export const commentConfig: CommentConfig = {
-  twikoo: {
-    envId: 'https://twikoo.mckero.com/.netlify/functions/twikoo',
-  },
+	twikoo: {
+		envId: 'https://twikoo.mckero.com/.netlify/functions/twikoo',
+	},
 }
