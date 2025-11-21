@@ -27,7 +27,7 @@ lang: zh_CN
 # cloudflare argo smart routing的订阅费用
 <font color="red">cloudflare argo smart routing的订阅费用还是有点很贵的，它是用流量计费的！</font>
 ![](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/image.73udk1d0th.webp)
-但是如果你的网站的流量很多的话，那账单就很贵，但是如果没什么流量的话，cloudflare argo smart routing又学习不到什么（就是效果不好）所以还是建议买Pro。
+但是如果你的网站的流量很多的话，那账单就很贵，但是如果没什么流量的话，cloudflare argo smart routing又学习不到什么（就是效果不好,argo smart routing是需要流量学习的）如果你的网站流量很大还是建议买Pro。
 # cloudflare argo smart routing测试TTFB和ip
   效果可能不是很好，因为我的源站就在cloudflare pages，cloudflare argo smart routing的主要效果就是减少TTFB，我现在关闭cloudflare argo smart routing测试一下TTFB。我先是用curl测试。
   这是我用ai生成的命令。
