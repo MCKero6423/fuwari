@@ -26,7 +26,7 @@ lang: zh_CN
 
 # cloudflare argo smart routing的订阅费用
 <font color="red">cloudflare argo smart routing的订阅费用还是有点很贵的，它是用流量计费的！</font>
-![](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/image.73udk1d0th.webp)
+![](https://img.mckero.com/old-blog-p/image.73udk1d0th.avif)
 但是如果你的网站的流量很多的话，那账单就很贵，但是如果没什么流量的话，cloudflare argo smart routing又学习不到什么（就是效果不好,argo smart routing是需要流量学习的）如果你的网站流量很大还是建议买Pro。
 # cloudflare argo smart routing测试TTFB和ip
   效果可能不是很好，因为我的源站就在cloudflare pages，cloudflare argo smart routing的主要效果就是减少TTFB，我现在关闭cloudflare argo smart routing测试一下TTFB。我先是用curl测试。
@@ -104,7 +104,7 @@ TLS: 0.000000s
 可以看到TTFB都在1.3秒左右
 
 ## 海外测试
-![keycdntext](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/Screenshot_20251118_164739.2yys7ukwws.jpg)
+![keycdntext](https://img.mckero.com/old-blog-p/Screenshot_20251118_164739.2yys7ukwws.avif)
 因为我设置了waf所以有些403了。可以看到大部分都在60ms左右。
 
 ## 没开cloudflare argo smart routing的IP
@@ -156,7 +156,7 @@ TLS: 0.885486s
 远程IP: 2606:4700:3108::ac42:2b81:443
 ```
 海外测试
-![](https://cdn.jsdelivr.net/gh/MCKero6423/picx-images-hosting@master/Screenshot_20251118_172141.77dzhp5dux.jpg)
+![](https://img.mckero.com/old-blog-p/Screenshot_20251118_172141.77dzhp5dux.avif)
 几乎没有什么提升(可能是因为我的源站在cloudflare pages)
 
 # cloudflare argo smart routing智能吗？
