@@ -51,6 +51,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "https://umami.mckero.com/share/v4wXkxwCYns2ypLN/blog.mckero.com",
 			external: true,
 		},
+		{
+			name: "开往",
+			url: "https://www.travellings.cn/go.html",
+			external: true,
+		},
 	],
 };
 
