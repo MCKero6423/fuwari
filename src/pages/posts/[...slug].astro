@@ -137,39 +137,110 @@ const jsonLd = {
         </a>
     </div>
 
-    <div class="hongmo-ai-container mt-4">
-        <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
-        
-        <script is:inline>
-            // 定义加载函数（模仿你的 loadTwikoo）
-            function loadHongmoAI() {
-                // 1. 基础配置
+<div class="hongmo-ai-container mt-4">
+    <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
+    
+    <script is:inline>
+        // 等待内容真正渲染的辅助函数
+        function waitForContent(selector, callback, timeout = 5000) {
+            const startTime = Date.now();
+            
+            function check() {
+                const element = document.querySelector(selector);
+                
+                // 检查元素存在且有实质内容（不只是空白）
+                if (element && element.textContent.trim().length > 100) {
+                    callback();
+                    return;
+                }
+                
+                // 超时保护
+                if (Date.now() - startTime > timeout) {
+                    console.warn('AI摘要: 等待内容超时');
+                    return;
+                }
+                
+                // 继续等待
+                requestAnimationFrame(check);
+            }
+            
+            check();
+        }
+
+        function loadHongmoAI() {
+            console.log('AI摘要: 开始加载流程');
+            
+            // 清理可能残留的旧摘要
+            document.querySelectorAll('.tianli-gpt-response').forEach(el => el.remove());
+            
+            // 等待内容真正渲染
+            waitForContent('.markdown-content', function() {
+                console.log('AI摘要: 内容已就绪，开始生成');
+                
+                // 再次检查是否已经有摘要（防止重复加载）
+                if (document.querySelector('.tianli-gpt-response')) {
+                    console.log('AI摘要: 已存在，跳过');
+                    return;
+                }
+                
+                // 配置
                 window.tianliGPT_postSelector = '.markdown-content';
                 window.tianliGPT_wordLimit = 700;
                 window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
+                
+                // 检查脚本是否已加载
+                const existingScript = document.querySelector('script[src*="tianli_gpt.min.js"]');
+                
+                if (existingScript) {
+                    // 脚本已存在，尝试重新触发（如果 API 支持）
+                    if (window.TianliGPT && typeof window.TianliGPT.init === 'function') {
+                        window.TianliGPT.init();
+                    } else {
+                        // 移除旧脚本，重新加载
+                        existingScript.remove();
+                        loadScript();
+                    }
+                } else {
+                    loadScript();
+                }
+            });
+        }
 
-                // 2. 防抖检查（解决“抽搐”的核心）：如果已经生成了摘要，绝对不要运行第二次！
-                var existing = document.querySelector('.tianli-gpt-response');
-                if (existing) return;
+        function loadScript() {
+            const script = document.createElement('script');
+            script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
+            script.defer = true;
+            script.onload = function() {
+                console.log('AI摘要: 脚本加载成功');
+            };
+            script.onerror = function() {
+                console.error('AI摘要: 脚本加载失败');
+            };
+            document.body.appendChild(script);
+        }
 
-                // 3. 动态加载脚本
-                var script = document.createElement('script');
-                script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
-                script.defer = true;
-                document.body.appendChild(script);
-            }
-
-            // 4. 核心逻辑：双重保险
-            // 情况A: 这是一个 Swup 跳转页面 -> 监听 swup:page:view 事件，且只执行一次
-            document.addEventListener('swup:page:view', loadHongmoAI, { once: true });
-            
-            // 情况B: 这是一个直接刷新的页面 -> 立即执行（因为可能没有 swup 事件）
-            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        // 智能加载策略
+        function initHongmoAI() {
+            // Swup 页面切换
+            document.addEventListener('swup:page:view', function() {
+                console.log('AI摘要: Swup 页面切换');
                 loadHongmoAI();
-            } else {
-                document.addEventListener('DOMContentLoaded', loadHongmoAI);
+            });
+            
+            // 首次直接访问/刷新
+            if (document.querySelector('.markdown-content')) {
+                console.log('AI摘要: 首次加载');
+                loadHongmoAI();
             }
-        </script>
-    </div>
+        }
+
+        // 确保在 Astro 完全加载后执行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initHongmoAI);
+        } else {
+            initHongmoAI();
+        }
+    </script>
+</div>
 
 </MainGridLayout>
