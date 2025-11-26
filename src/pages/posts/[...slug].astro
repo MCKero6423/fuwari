@@ -137,17 +137,33 @@ const jsonLd = {
         </a>
     </div>
 
-    <div class="hongmo-ai-container mt-4">
+<div class="hongmo-ai-container mt-4">
     <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
     <script is:inline>
-        var tianliGPT_postSelector = '.markdown-content'; /* 已根据你的源码修改为正确参数 */
-        var tianliGPT_postURL = '*/posts/*';
-        var tianliGPT_wordLimit = 700;
-        var tianliGPT_typingAnimate = false;
-        var tianliGPT_Title = '智能摘要';
-        var tianliGPT_loadingText = false;
-        var tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
+        // 1. 定义配置参数
+        window.tianliGPT_postSelector = '.markdown-content';
+        window.tianliGPT_postURL = '*/posts/*'; // 确保你的网址结构里真的有 /posts/
+        window.tianliGPT_wordLimit = 700;
+        window.tianliGPT_typingAnimate = false;
+        window.tianliGPT_Title = '智能摘要';
+        window.tianliGPT_loadingText = false;
+        window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
+
+        // 2. 定义启动函数
+        function initTianliGPT() {
+            // 确保 tianliGPT 脚本已加载且对象存在
+            if (typeof window.tianliGPT === 'object' && typeof window.tianliGPT.checkURLAndRun === 'function') {
+                // 稍微延迟一下，确保 DOM 已经渲染完毕（Fuwari 有入场动画）
+                setTimeout(() => {
+                    window.tianliGPT.checkURLAndRun();
+                }, 200); 
+            }
+        }
+
+        // 3. 监听 Astro 的页面加载事件 (这是修复“时有时无”的关键)
+        document.addEventListener('astro:page-load', initTianliGPT);
     </script>
+    
     <script is:inline src="https://ai.zhheo.com/static/public/tianli_gpt.min.js"></script>
 </div>
 
