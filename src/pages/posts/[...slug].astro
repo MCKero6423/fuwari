@@ -137,14 +137,28 @@ const jsonLd = {
         </a>
     </div>
     <div class="hongmo-ai-container mt-4">
-    <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
-    <script is:inline>
-        var tianliGPT_postSelector = '.markdown-content'; /* 已根据你的源码修改为正确参数 */
-        var tianliGPT_wordLimit = 700;
-        var tianliGPT_Title = '智能摘要';
-        var tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
-    </script>
-    <script is:inline src="https://ai.zhheo.com/static/public/tianli_gpt.min.js"></script>
-</div>
+        <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
+        
+        <script is:inline>
+            // 1. 设置参数
+            var tianliGPT_postSelector = '.markdown-content';
+            var tianliGPT_wordLimit = 700; // 已调整为 700，摘要内容会更丰富
+            var tianliGPT_Title = '智能摘要';
+            var tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
+
+            // 2. 暴力重载脚本 (解决 Swup 切换不显示的问题)
+            (function() {
+                var oldScript = document.getElementById('tianli-gpt-script');
+                if (oldScript) { oldScript.remove(); }
+
+                var script = document.createElement('script');
+                script.id = 'tianli-gpt-script';
+                script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
+                script.async = true;
+                
+                document.body.appendChild(script);
+            })();
+        </script>
+    </div>
 
 </MainGridLayout>
