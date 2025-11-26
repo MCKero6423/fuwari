@@ -137,77 +137,15 @@ const jsonLd = {
         </a>
     </div>
 
-<div class="hongmo-ai-container mt-4">
-        <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
-        
-        <script is:inline>
-            // 定义核心加载函数
-            function loadHongmoAI() {
-                // 1. 找到文章容器
-                const content = document.querySelector('.markdown-content');
-                if (!content) return;
-
-                // 2.【关键修复】防抽搐：检查是否已经存在摘要？
-                // 如果页面里已经有摘要框了，说明插件正在运行或已完成，直接退出，绝不运行第二次！
-                if (content.querySelector('.post-TianliGPT') || content.querySelector('.tianli-gpt-response')) {
-                    return;
-                }
-
-                // 3.【关键修复】防堆积：清理旧脚本
-                // 这一步至关重要！每次加载前把上一个页面留下的脚本删掉，防止后台积压多个脚本打架
-                const oldScript = document.getElementById('tianli-gpt-script');
-                if (oldScript) { oldScript.remove(); }
-
-                // 4. 重新配置参数
-                window.tianliGPT_postSelector = '.markdown-content';
-                window.tianliGPT_wordLimit = 700;
-                window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
-
-                // 5. 插入新脚本
-                const script = document.createElement('script');
-                script.id = 'tianli-gpt-script'; // 给它个身份证，方便下次删除
-                script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
-                script.defer = true;
-                document.body.appendChild(script);
-            }
-
-            // 定义触发逻辑：动画监听 + 兜底定时器
-            function triggerHongmo() {
-                const content = document.querySelector('.markdown-content');
-                if (!content) return;
-
-                // 尝试找到父级动画元素
-                const animated = content.closest('.onload-animation');
-                
-                if (animated) {
-                    let hasLoaded = false;
-                    const start = () => {
-                        if (hasLoaded) return;
-                        hasLoaded = true;
-                        loadHongmoAI();
-                    };
-
-                    // 保险 A: 监听动画结束事件 (体验最丝滑)
-                    animated.addEventListener('animationend', start, { once: true });
-                    
-                    // 保险 B: 兜底定时器 (解决新文章偶尔不加载)
-                    // 如果 0.5秒 后动画还没告诉我们可以开始，我们就强制开始，不再傻等
-                    setTimeout(start, 500);
-                } else {
-                    // 没有动画，直接加载
-                    loadHongmoAI();
-                }
-            }
-
-            // 绑定 Swup 和 页面加载事件
-            document.addEventListener('swup:page:view', triggerHongmo);
-            
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', triggerHongmo);
-            } else {
-                triggerHongmo();
-            }
-        </script>
-    </div>
+    <div class="hongmo-ai-container mt-4">
+    <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
+    <script is:inline>
+        var tianliGPT_postSelector = '.markdown-content'; /* 已根据你的源码修改为正确参数 */
+        var tianliGPT_wordLimit = 700;
+        var tianliGPT_Title = '智能摘要';
+        var tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
+    </script>
+    <script is:inline src="https://ai.zhheo.com/static/public/tianli_gpt.min.js"></script>
+</div>
 
 </MainGridLayout>
