@@ -141,106 +141,83 @@ const jsonLd = {
     <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
     
     <script is:inline>
-        // 等待内容真正渲染的辅助函数
-        function waitForContent(selector, callback, timeout = 5000) {
-            const startTime = Date.now();
-            
-            function check() {
-                const element = document.querySelector(selector);
-                
-                // 检查元素存在且有实质内容（不只是空白）
-                if (element && element.textContent.trim().length > 100) {
-                    callback();
-                    return;
-                }
-                
-                // 超时保护
-                if (Date.now() - startTime > timeout) {
-                    console.warn('AI摘要: 等待内容超时');
-                    return;
-                }
-                
-                // 继续等待
-                requestAnimationFrame(check);
-            }
-            
-            check();
-        }
-
         function loadHongmoAI() {
-            console.log('AI摘要: 开始加载流程');
-            
-            // 清理可能残留的旧摘要
-            document.querySelectorAll('.tianli-gpt-response').forEach(el => el.remove());
-            
-            // 等待内容真正渲染
-            waitForContent('.markdown-content', function() {
-                console.log('AI摘要: 内容已就绪，开始生成');
-                
-                // 再次检查是否已经有摘要（防止重复加载）
-                if (document.querySelector('.tianli-gpt-response')) {
-                    console.log('AI摘要: 已存在，跳过');
-                    return;
-                }
-                
-                // 配置
-                window.tianliGPT_postSelector = '.markdown-content';
-                window.tianliGPT_wordLimit = 700;
-                window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
-                
-                // 检查脚本是否已加载
-                const existingScript = document.querySelector('script[src*="tianli_gpt.min.js"]');
-                
-                if (existingScript) {
-                    // 脚本已存在，尝试重新触发（如果 API 支持）
-                    if (window.TianliGPT && typeof window.TianliGPT.init === 'function') {
-                        window.TianliGPT.init();
-                    } else {
-                        // 移除旧脚本，重新加载
-                        existingScript.remove();
-                        loadScript();
-                    }
-                } else {
-                    loadScript();
-                }
-            });
-        }
+            // 检查内容是否存在
+            const contentElement = document.querySelector('.markdown-content');
+            if (!contentElement || !contentElement.textContent.trim()) {
+                console.warn('AI摘要: 内容元素未就绪');
+                return;
+            }
 
-        function loadScript() {
+            // 检查是否已经加载过
+            if (document.querySelector('.tianli-gpt-response')) {
+                console.log('AI摘要: 已存在，跳过');
+                return;
+            }
+
+            console.log('AI摘要: 开始加载');
+
+            // 配置
+            window.tianliGPT_postSelector = '.markdown-content';
+            window.tianliGPT_wordLimit = 700;
+            window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
+
+            // 动态加载脚本
             const script = document.createElement('script');
             script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
             script.defer = true;
-            script.onload = function() {
+            script.onload = () => {
                 console.log('AI摘要: 脚本加载成功');
             };
-            script.onerror = function() {
+            script.onerror = () => {
                 console.error('AI摘要: 脚本加载失败');
             };
             document.body.appendChild(script);
         }
 
-        // 智能加载策略
-        function initHongmoAI() {
-            // Swup 页面切换
-            document.addEventListener('swup:page:view', function() {
-                console.log('AI摘要: Swup 页面切换');
-                loadHongmoAI();
-            });
-            
-            // 首次直接访问/刷新
-            if (document.querySelector('.markdown-content')) {
-                console.log('AI摘要: 首次加载');
-                loadHongmoAI();
-            }
+        // 监听自定义的加载事件
+        document.addEventListener("loadHongmoAI", loadHongmoAI, { once: true });
+    </script>
+</div>
+
+<!-- 触发 AI 摘要加载的脚本 -->
+<script is:inline>
+    // 确保内容完全加载后再触发 AI 摘要加载
+    function triggerHongmoAILoad() {
+        // 等待动画完成
+        const markdownContent = document.querySelector('.markdown-content');
+        if (!markdownContent) {
+            console.warn('AI摘要触发器: 找不到内容元素');
+            return;
         }
 
-        // 确保在 Astro 完全加载后执行
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initHongmoAI);
+        // 监听动画结束
+        const animatedElement = markdownContent.closest('.onload-animation');
+        if (animatedElement) {
+            animatedElement.addEventListener('animationend', () => {
+                console.log('AI摘要触发器: 动画完成，触发加载事件');
+                document.dispatchEvent(new Event('loadHongmoAI'));
+            }, { once: true });
         } else {
-            initHongmoAI();
+            // 如果没有动画，直接触发
+            console.log('AI摘要触发器: 无动画，直接触发加载事件');
+            document.dispatchEvent(new Event('loadHongmoAI'));
         }
-    </script>
+    }
+
+    // 页面加载时触发
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', triggerHongmoAILoad);
+    } else {
+        triggerHongmoAILoad();
+    }
+
+    // Swup 页面切换时触发
+    document.addEventListener('swup:page:view', () => {
+        console.log('AI摘要触发器: Swup 页面切换');
+        triggerHongmoAILoad();
+    });
+</script>
 </div>
 
 </MainGridLayout>
