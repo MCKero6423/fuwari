@@ -9,7 +9,8 @@ category: cloudflare
 draft: false
 series: cloudflare
 lang: zh_CN
-customcover: https://img.mckero.com/use-cloudflare-argo/fengmian.avif
+customcover: https://img.mckero.com/use-cloudflare-argo/fengmian.png
+image: https://img.mckero.com/use-cloudflare-argo/fengmian.png
 ---
 # 什么是cloudflare argo smart routing？
   [cloudflare](https://www.cloudflare.com/zh-cn/application-services/products/argo-smart-routing/)是这样说的。
