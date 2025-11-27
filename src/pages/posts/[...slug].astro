@@ -140,8 +140,8 @@ const jsonLd = {
 <div class="hongmo-ai-container mt-4">
     <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
     
-    <script is:inline>
-        // 配置参数
+    <!-- 配置脚本 - 使用 data-astro-rerun 确保每次都执行 -->
+    <script is:inline data-astro-rerun>
         window.tianliGPT_postSelector = '.markdown-content';
         window.tianliGPT_postURL = '*/posts/*';
         window.tianliGPT_wordLimit = 700;
@@ -150,82 +150,43 @@ const jsonLd = {
         window.tianliGPT_loadingText = false;
         window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
 
-        // 全局标志,防止重复初始化
-        window.tianliGPT_initialized = false;
-
-        // 强力初始化函数(带重试机制)
-        function initTianliGPTWithRetry(attempt = 0) {
-            const maxAttempts = 15; // 最多重试15次
-            const retryDelay = 200;  // 每次间隔200ms
-
-            // 超过最大尝试次数
-            if (attempt >= maxAttempts) {
-                console.warn('TianliGPT: 达到最大重试次数');
-                return;
-            }
-
-            // 检查脚本是否加载
-            if (typeof window.tianliGPT !== 'object' || 
-                typeof window.tianliGPT.checkURLAndRun !== 'function') {
-                setTimeout(() => initTianliGPTWithRetry(attempt + 1), retryDelay);
-                return;
-            }
-
-            // 检查目标元素是否存在
-            const targetElement = document.querySelector(window.tianliGPT_postSelector);
-            if (!targetElement) {
-                setTimeout(() => initTianliGPTWithRetry(attempt + 1), retryDelay);
-                return;
-            }
-
-            // 检查是否是文章页面
-            if (!window.location.pathname.includes('/posts/')) {
-                return;
-            }
-
-            // 执行初始化
-            try {
-                // 清除可能已存在的摘要容器(避免重复)
-                const existingContainer = document.querySelector('#tianliGPT');
-                if (existingContainer) {
-                    existingContainer.remove();
-                }
-
-                window.tianliGPT.checkURLAndRun();
-                window.tianliGPT_initialized = true;
-                console.log('✓ TianliGPT 初始化成功');
-            } catch (error) {
-                console.error('TianliGPT 初始化错误:', error);
+        // 立即尝试初始化
+        function tryInitTianliGPT() {
+            if (typeof window.tianliGPT === 'object' && 
+                typeof window.tianliGPT.checkURLAndRun === 'function') {
+                
+                // 清除旧的摘要
+                const old = document.querySelector('#tianliGPT');
+                if (old) old.remove();
+                
+                // 等待 DOM 和动画
+                setTimeout(() => {
+                    if (document.querySelector('.markdown-content')) {
+                        window.tianliGPT.checkURLAndRun();
+                        console.log('✓ TianliGPT 初始化成功');
+                    }
+                }, 500);
+            } else {
+                // 脚本还没加载,继续等待
+                setTimeout(tryInitTianliGPT, 200);
             }
         }
 
-        // 监听 Astro 的各种事件
-        document.addEventListener('astro:page-load', () => {
-            window.tianliGPT_initialized = false;
-            setTimeout(() => initTianliGPTWithRetry(0), 100);
-        });
-
-        document.addEventListener('astro:after-swap', () => {
-            window.tianliGPT_initialized = false;
-            setTimeout(() => initTianliGPTWithRetry(0), 100);
-        });
-
-        // 首次加载
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => initTianliGPTWithRetry(0));
-        } else {
-            initTianliGPTWithRetry(0);
-        }
-
-        // 兜底:脚本加载完成后再尝试一次
-        window.addEventListener('load', () => {
-            if (!window.tianliGPT_initialized) {
-                setTimeout(() => initTianliGPTWithRetry(0), 300);
-            }
-        });
+        // 开始尝试
+        tryInitTianliGPT();
     </script>
     
-    <script is:inline src="https://ai.zhheo.com/static/public/tianli_gpt.min.js"></script>
+    <!-- 主脚本 - 只加载一次 -->
+    <script is:inline>
+        // 使用全局标志避免重复加载脚本
+        if (!window.tianliGPT_scriptLoaded) {
+            window.tianliGPT_scriptLoaded = true;
+            const script = document.createElement('script');
+            script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
+            script.async = true;
+            document.body.appendChild(script);
+        }
+    </script>
 </div>
 
 </MainGridLayout>
