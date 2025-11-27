@@ -5,6 +5,7 @@ description: cloudflare在中国大陆的访问速度太慢了，我看到cloudf
 tags:
   - cloudflare
   - cloudflareArgo智能路由
+categories: 'https://img.mckero.com/use-cloudflare-argo/fengmian.avif'
 category: cloudflare
 draft: false
 series: cloudflare
