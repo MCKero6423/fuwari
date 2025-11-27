@@ -75,32 +75,57 @@ tianliGPT_postSelector这个参你自己去获取，洪墨AI文档中有记载�
 
 找到`src/pages/posts/[...slug].astro`中的最后一个`</MainGridLayout>`（应该是在文件最下面）找到`</MainGridLayout>`上面的`</div>`
 
-这是我使用的代码（这个也是Gemini写的，如果你的博客也是fuwari你可以试试）
+这是我使用的代码（刚开始我是使用Gemini写的，但是效果太差所以我就换Claude来写了，如果你的博客也是fuwari你可以试试）
 ```html title="[...slug].astro"
 <div class="hongmo-ai-container mt-4">
-        <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
-        
-        <script is:inline>
-            // 1. 设置参数
-            var tianliGPT_postSelector = '.markdown-content';
-            var tianliGPT_wordLimit = 700; // 已调整为 700，摘要内容会更丰富
-            var tianliGPT_Title = '智能摘要';
-            var tianliGPT_key = '你的项目KEY';
+    <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
+    
+    <!-- 配置脚本 - 使用 data-astro-rerun 确保每次都执行 -->
+    <script is:inline data-astro-rerun>
+        window.tianliGPT_postSelector = '.markdown-content';
+        window.tianliGPT_postURL = '*/posts/*';
+        window.tianliGPT_wordLimit = 700;
+        window.tianliGPT_Title = '智能摘要';
+        window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
 
-            // 2. 暴力重载脚本 (解决 Swup 切换不显示的问题)
-            (function() {
-                var oldScript = document.getElementById('tianli-gpt-script');
-                if (oldScript) { oldScript.remove(); }
-
-                var script = document.createElement('script');
-                script.id = 'tianli-gpt-script';
-                script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
-                script.async = true;
+        // 立即尝试初始化
+        function tryInitTianliGPT() {
+            if (typeof window.tianliGPT === 'object' && 
+                typeof window.tianliGPT.checkURLAndRun === 'function') {
                 
-                document.body.appendChild(script);
-            })();
-        </script>
-    </div>
+                // 清除旧的摘要
+                const old = document.querySelector('#tianliGPT');
+                if (old) old.remove();
+                
+                // 等待 DOM 和动画
+                setTimeout(() => {
+                    if (document.querySelector('.markdown-content')) {
+                        window.tianliGPT.checkURLAndRun();
+                        console.log('✓ TianliGPT 初始化成功');
+                    }
+                }, 500);
+            } else {
+                // 脚本还没加载,继续等待
+                setTimeout(tryInitTianliGPT, 200);
+            }
+        }
+
+        // 开始尝试
+        tryInitTianliGPT();
+    </script>
+    
+    <!-- 主脚本 - 只加载一次 -->
+    <script is:inline>
+        // 使用全局标志避免重复加载脚本
+        if (!window.tianliGPT_scriptLoaded) {
+            window.tianliGPT_scriptLoaded = true;
+            const script = document.createElement('script');
+            script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
+            script.async = true;
+            document.body.appendChild(script);
+        }
+    </script>
+</div>
 ```
 
 插入后部署完就可以看到AI摘要了。
