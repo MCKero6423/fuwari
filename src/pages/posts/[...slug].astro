@@ -139,29 +139,90 @@ const jsonLd = {
 
 <div class="hongmo-ai-container mt-4">
     <link rel="stylesheet" href="https://ai.zhheo.com/static/public/tianli_gpt.min.css">
+    
     <script is:inline>
-        // 1. 定义配置参数
-        window.tianliGPT_postSelector = '#post-container';
-        window.tianliGPT_postURL = '*/posts/*'; // 确保你的网址结构里真的有 /posts/
+        // 配置参数
+        window.tianliGPT_postSelector = '.markdown-content';
+        window.tianliGPT_postURL = '*/posts/*';
         window.tianliGPT_wordLimit = 700;
         window.tianliGPT_typingAnimate = false;
         window.tianliGPT_Title = '智能摘要';
         window.tianliGPT_loadingText = false;
         window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
 
-        // 2. 定义启动函数
-        function initTianliGPT() {
-            // 确保 tianliGPT 脚本已加载且对象存在
-            if (typeof window.tianliGPT === 'object' && typeof window.tianliGPT.checkURLAndRun === 'function') {
-                // 稍微延迟一下，确保 DOM 已经渲染完毕（Fuwari 有入场动画）
-                setTimeout(() => {
-                    window.tianliGPT.checkURLAndRun();
-                }, 200); 
+        // 全局标志,防止重复初始化
+        window.tianliGPT_initialized = false;
+
+        // 强力初始化函数(带重试机制)
+        function initTianliGPTWithRetry(attempt = 0) {
+            const maxAttempts = 15; // 最多重试15次
+            const retryDelay = 200;  // 每次间隔200ms
+
+            // 超过最大尝试次数
+            if (attempt >= maxAttempts) {
+                console.warn('TianliGPT: 达到最大重试次数');
+                return;
+            }
+
+            // 检查脚本是否加载
+            if (typeof window.tianliGPT !== 'object' || 
+                typeof window.tianliGPT.checkURLAndRun !== 'function') {
+                setTimeout(() => initTianliGPTWithRetry(attempt + 1), retryDelay);
+                return;
+            }
+
+            // 检查目标元素是否存在
+            const targetElement = document.querySelector(window.tianliGPT_postSelector);
+            if (!targetElement) {
+                setTimeout(() => initTianliGPTWithRetry(attempt + 1), retryDelay);
+                return;
+            }
+
+            // 检查是否是文章页面
+            if (!window.location.pathname.includes('/posts/')) {
+                return;
+            }
+
+            // 执行初始化
+            try {
+                // 清除可能已存在的摘要容器(避免重复)
+                const existingContainer = document.querySelector('#tianliGPT');
+                if (existingContainer) {
+                    existingContainer.remove();
+                }
+
+                window.tianliGPT.checkURLAndRun();
+                window.tianliGPT_initialized = true;
+                console.log('✓ TianliGPT 初始化成功');
+            } catch (error) {
+                console.error('TianliGPT 初始化错误:', error);
             }
         }
 
-        // 3. 监听 Astro 的页面加载事件 (这是修复“时有时无”的关键)
-        document.addEventListener('astro:page-load', initTianliGPT);
+        // 监听 Astro 的各种事件
+        document.addEventListener('astro:page-load', () => {
+            window.tianliGPT_initialized = false;
+            setTimeout(() => initTianliGPTWithRetry(0), 100);
+        });
+
+        document.addEventListener('astro:after-swap', () => {
+            window.tianliGPT_initialized = false;
+            setTimeout(() => initTianliGPTWithRetry(0), 100);
+        });
+
+        // 首次加载
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => initTianliGPTWithRetry(0));
+        } else {
+            initTianliGPTWithRetry(0);
+        }
+
+        // 兜底:脚本加载完成后再尝试一次
+        window.addEventListener('load', () => {
+            if (!window.tianliGPT_initialized) {
+                setTimeout(() => initTianliGPTWithRetry(0), 300);
+            }
+        });
     </script>
     
     <script is:inline src="https://ai.zhheo.com/static/public/tianli_gpt.min.js"></script>
