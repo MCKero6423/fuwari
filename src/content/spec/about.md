@@ -3,6 +3,9 @@
 
 ::github{repo="saicaca/fuwari"}
 
+# 赞助/支持我
+<p>如果我的网站对你有帮助，欢迎在 <a href="https://afdian.com/a/MCKeroblog" target="_blank" rel="noopener noreferrer">爱发电</a> 支持我，谢谢你！</p>
+
 ## 感谢列表
 ### 排名不分先后
 
