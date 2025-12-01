@@ -2,8 +2,8 @@
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
 
-// --- 配置支出项目 ---
-const expenses = [
+// --- 1. 固定支出项目配置 (用于顶部概览) ---
+const fixedExpenses = [
     {
         name: "Cloudflare Argo Smart Routing",
         price: "5.00",
@@ -27,18 +27,38 @@ const expenses = [
     },
 ];
 
-// 自动计算总额
-const totalMonthly = expenses.reduce((acc, item) => {
+// 自动计算每月固定预估 (顶部大数字)
+const totalMonthly = fixedExpenses.reduce((acc, item) => {
     let price = parseFloat(item.price);
     if (item.isYearly) {
         price = price / 12;
     }
     return acc + price;
 }, 0).toFixed(2);
+
+
+// --- 2. 历史详细账单 (在这里添加每月的实际数据) ---
+// 格式：{ date: 'YYYY/MM', cost: '支出金额', income: '赞助金额', items: '消费内容' }
+const historyData = [
+    { 
+        date: "2025/11", 
+        cost: "5.8", 
+        income: "0.00", 
+        items: "Argo 订阅费" 
+    },
+    { 
+        date: "2025/10", 
+        cost: "5.20", 
+        income: "0.80", 
+        items: "Argo 流量费" 
+    },
+    // 可以在这里继续添加...
+];
 ---
 
 <MainGridLayout title="运行成本">
     <div class="card-base p-6 md:p-8">
+        
         <div class="flex items-center gap-2 mb-6">
             <div class="h-8 w-8 rounded-lg bg-[var(--primary)] flex items-center justify-center text-white dark:text-black/70">
                 <Icon name="material-symbols:account-balance-wallet" class="text-[1.5rem]" />
@@ -48,7 +68,7 @@ const totalMonthly = expenses.reduce((acc, item) => {
 
         <div class="mb-8 p-4 rounded-xl bg-[var(--btn-regular-bg)] border border-black/5 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="text-center md:text-left">
-                <div class="text-sm text-black/50 dark:text-white/50">每月预估总支出</div>
+                <div class="text-sm text-black/50 dark:text-white/50">每月预估固定支出</div>
                 <div class="text-3xl font-bold text-[var(--primary)]">${totalMonthly} <span class="text-base font-normal text-black/40 dark:text-white/40">/ 月</span></div>
             </div>
             <div class="text-xs text-black/40 dark:text-white/40 max-w-xs text-center md:text-right">
@@ -57,6 +77,9 @@ const totalMonthly = expenses.reduce((acc, item) => {
         </div>
      
         <div class="w-full overflow-x-auto mb-10">
+            <h2 class="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+                <Icon name="material-symbols:list-alt-outline" /> 固定支出项目
+            </h2>
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="border-b border-black/10 dark:border-white/10 text-black/60 dark:text-white/60 text-sm">
@@ -66,7 +89,7 @@ const totalMonthly = expenses.reduce((acc, item) => {
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-black/5 dark:divide-white/5">
-                    {expenses.map((item) => (
+                    {fixedExpenses.map((item) => (
                         <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200">
                             <td class="py-4 px-2">
                                 <div class="font-bold text-black dark:text-white">{item.name}</div>
@@ -85,14 +108,12 @@ const totalMonthly = expenses.reduce((acc, item) => {
             </table>
         </div>
 
-        <div class="rounded-xl bg-[var(--card-bg)] border border-black/5 dark:border-white/5 p-6 md:p-8 text-center relative overflow-hidden group">
+        <div class="rounded-xl bg-[var(--card-bg)] border border-black/5 dark:border-white/5 p-6 md:p-8 text-center relative overflow-hidden group mb-10">
             <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-[var(--primary)] opacity-10 blur-3xl rounded-full pointer-events-none"></div>
-            
             <h3 class="text-xl font-bold text-black dark:text-white mb-3">支持我的创作</h3>
             <p class="text-black/60 dark:text-white/60 mb-6 max-w-lg mx-auto leading-relaxed">
                 你的支持是我持续更新的最大动力！哪怕是一杯咖啡的钱，也能让我开心很久。非常感谢！
             </p>
-            
             <a href="https://afdian.com/a/MCKeroblog" target="_blank" rel="noopener noreferrer" 
                class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#946ce6] text-white font-bold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-[#946ce6]/30">
                 <Icon name="material-symbols:favorite" class="text-[1.2rem]" />
@@ -100,11 +121,37 @@ const totalMonthly = expenses.reduce((acc, item) => {
             </a>
         </div>
 
-        <div class="mt-8 pt-4 border-t border-black/5 dark:border-white/5">
-        	<p class="text-sm text-black/40 dark:text-white/40 flex items-center gap-1">
-                <Icon name="material-symbols:info-outline" class="text-[1rem]"/>
-        		说明：Cloudflare Argo 费用为预估值，实际费用取决于当月流量。
-        	</p>
+        <div class="w-full">
+            <h2 class="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
+                <Icon name="material-symbols:history" /> 历史收支明细
+            </h2>
+            <div class="overflow-x-auto rounded-lg border border-black/5 dark:border-white/5">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead class="bg-black/5 dark:bg-white/5">
+                        <tr class="text-black/60 dark:text-white/60">
+                            <th class="py-3 px-4 font-medium whitespace-nowrap">日期</th>
+                            <th class="py-3 px-4 font-medium w-full">消费内容</th>
+                            <th class="py-3 px-4 font-medium text-right whitespace-nowrap">支出</th>
+                            <th class="py-3 px-4 font-medium text-right whitespace-nowrap text-green-600 dark:text-green-400">赞助</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-black/5 dark:divide-white/5">
+                        {historyData.map((row) => (
+                            <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                                <td class="py-3 px-4 whitespace-nowrap font-medium text-black/80 dark:text-white/80">{row.date}</td>
+                                <td class="py-3 px-4 text-black/60 dark:text-white/60">{row.items}</td>
+                                <td class="py-3 px-4 text-right whitespace-nowrap font-mono text-black/70 dark:text-white/70">-${row.cost}</td>
+                                <td class="py-3 px-4 text-right whitespace-nowrap font-mono font-bold text-green-600 dark:text-green-400">
+                                    {parseFloat(row.income) > 0 ? `+$${row.income}` : '-'}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-xs text-black/30 dark:text-white/30 mt-2 text-right">
+                * 收支数据通常在次月月初更新
+            </div>
         </div>
 
     </div>
