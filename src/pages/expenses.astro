@@ -1,0 +1,87 @@
+---
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+// --- 在这里配置你的支出项目 ---
+const expenses = [
+    {
+        name: "Cloudflare Argo Smart Routing",
+        price: "5.00", // 基础费用，根据流量会有浮动
+        cycle: "每月",
+        desc: "智能路由加速，优化全球访问速度"
+    },
+    {
+        name: "域名 (mckero.com)",
+        price: "10", // 假设约 $10.00/年，平均到每月
+        cycle: "每年",
+        desc: "域名的持有成本"
+    },
+    {
+        name: "Cloudflare Pages",
+        price: "0.00",
+        cycle: "每月",
+        desc: "静态页面托管 (Free Plan)"
+    },
+    // 你可以在这里继续添加项目...
+];
+
+// 自动计算总额
+const totalMonthly = expenses.reduce((acc, item) => acc + parseFloat(item.price), 0).toFixed(2);
+---
+
+<MainGridLayout title="运行成本">
+    <div class="card-base p-6 md:p-8">
+        <div class="flex items-center gap-2 mb-6">
+            <div class="h-8 w-8 rounded-lg bg-[var(--primary)] flex items-center justify-center text-white dark:text-black/70">
+                <Icon name="material-symbols:account-balance-wallet" class="text-[1.5rem]" />
+            </div>
+            <h1 class="text-2xl font-bold text-black dark:text-white">运行成本</h1>
+        </div>
+
+        <div class="mb-8 p-4 rounded-xl bg-[var(--btn-regular-bg)] border border-black/5 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <div class="text-sm text-black/50 dark:text-white/50">每月预估总支出</div>
+                <div class="text-3xl font-bold text-[var(--primary)]">${totalMonthly} <span class="text-base font-normal text-black/40 dark:text-white/40">/ 月</span></div>
+            </div>
+            <div class="text-xs text-black/40 dark:text-white/40 max-w-xs text-center md:text-right">
+                为了追求极致的访问速度与稳定性，这是必要的投入。
+            </div>
+        </div>
+     
+        <div class="w-full overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-black/10 dark:border-white/10 text-black/60 dark:text-white/60 text-sm">
+                        <th class="py-3 px-2 font-medium">项目名称</th>
+                        <th class="py-3 px-2 font-medium">用途说明</th>
+                        <th class="py-3 px-2 font-medium text-right">费用 (USD)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-black/5 dark:divide-white/5">
+                    {expenses.map((item) => (
+                        <tr class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors duration-200">
+                            <td class="py-4 px-2">
+                                <div class="font-bold text-black dark:text-white">{item.name}</div>
+                                <div class="text-xs text-black/40 dark:text-white/40 md:hidden">{item.desc}</div> </td>
+                            <td class="py-4 px-2 hidden md:table-cell">
+                                <div class="text-sm text-black/60 dark:text-white/60">{item.desc}</div>
+                            </td>
+                            <td class="py-4 px-2 text-right">
+                                <div class="font-bold text-black dark:text-white">${item.price}</div>
+                                <div class="text-xs text-black/40 dark:text-white/40 scale-90 origin-right">{item.cycle}</div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-black/5 dark:border-white/5">
+        	<p class="text-sm text-black/40 dark:text-white/40 flex items-center gap-1">
+                <Icon name="material-symbols:info-outline" class="text-[1rem]"/>
+        		说明：Cloudflare Argo 费用为预估值，实际费用取决于当月流量。
+        	</p>
+        </div>
+
+    </div>
+</MainGridLayout>
