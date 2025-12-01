@@ -40,8 +40,8 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Archive,
 		LinkPreset.Series,
 		LinkPreset.Friends,
-		LinkPreset.About,
 		LinkPreset.Expenses,
+		LinkPreset.About,
 		{
 			name: "状态",
 			url: "https://status.mckero.com",
