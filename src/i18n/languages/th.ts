@@ -37,4 +37,5 @@ export const th: Translation = {
 	[Key.license]: "สัญญาอนุญาต",
  [Key.series]: 'ชุด',
  [Key.friends]: 'เพื่อนร่วมลิงก์'
+ [Key.expenses]: 'ค่าใช้จ่าย',
 };

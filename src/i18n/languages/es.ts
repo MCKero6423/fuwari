@@ -37,4 +37,5 @@ export const es: Translation = {
 	[Key.license]: "Licencia",
  [Key.series]: 'Serie',
  [Key.friends]: 'Enlace amigable',
+ [Key.expenses]: 'gastos',
 };

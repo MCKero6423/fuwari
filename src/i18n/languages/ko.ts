@@ -37,4 +37,5 @@ export const ko: Translation = {
 	[Key.license]: "라이선스",
  [Key.series]: '시리즈',
  [Key.friends]: '친구 링크',
+ [Key.expenses]: '경비',
 };
