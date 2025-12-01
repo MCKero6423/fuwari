@@ -4,7 +4,14 @@
 ::github{repo="saicaca/fuwari"}
 
 # 赞助/支持我
-<p>如果我的网站对你有帮助，欢迎在 <a href="https://afdian.com/a/MCKeroblog" target="_blank" rel="noopener noreferrer">爱发电</a> 支持我，谢谢你！</p>
+<!-- 这是一个完整的卡片模块 -->
+<div style="border: 1px solid #e0e0e0; border-radius: 12px; padding: 25px; max-width: 400px; text-align: center; margin: 20px auto; font-family: sans-serif;">
+  <h3 style="margin-top: 0;">支持我的创作</h3>
+  <p style="color: #555555; line-height: 1.6;">你的支持是我持续更新的最大动力！哪怕是一杯咖啡的钱，也能让我开心很久。非常感谢！</p>
+  <a href="https://afdian.com/a/MCKeroblog" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 10px; padding: 12px 25px; background-color: #946ce6; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: bold; transition: background-color 0.3s;">
+    前往爱发电赞助
+  </a>
+</div>
 
 ## 感谢列表
 ### 排名不分先后
