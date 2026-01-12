@@ -13,6 +13,8 @@ lang: zh_CN
 # BD6KIS制作的矿石收音机
 “今日更新一篇关于**无源无线电接收**的文章
 
+> ⚠️ **声明**：本文由 AI (Gemini) 辅助撰写
+
 可以在[BD6KIS的QRZ.com主页](https://www.qrz.com/db/BD6KIS)查看他的信息。
 
 # 分析
