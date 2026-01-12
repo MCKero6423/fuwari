@@ -2,42 +2,32 @@ import { visit } from 'unist-util-visit';
 
 export function rehypeImageOptimization() {
   return (tree) => {
-    // 1. 严谨写法：只遍历 element 类型的节点
     visit(tree, 'element', (node) => {
       
-      // 2. 防御检查：必须是 img 标签，且必须有属性
-      if (node.tagName !== 'img' || !node.properties) {
-        return;
-      }
-
-      const src = node.properties.src;
+      // 1. 基础防御检查
+      if (node.tagName !== 'img' || !node.properties) return;
       
-      // 3. 防御检查：没有 src 属性直接跳过
+      const src = node.properties.src;
       if (!src) return;
 
       let urlObj;
       try {
-        // 4. 防御检查：尝试解析 URL，如果是相对路径会报错进入 catch
         urlObj = new URL(src);
       } catch (e) {
-        // 解析失败（相对路径），只加懒加载，不处理链接
+        // 相对路径兜底
         node.properties.loading = 'lazy';
         node.properties.decoding = 'async';
         return; 
       }
 
-      // ============================================================
-      // 业务逻辑：只处理 img.mckero.com
-      // ============================================================
+      // 2. 业务逻辑：只处理 img.mckero.com
       if (urlObj.hostname !== 'img.mckero.com') {
         node.properties.loading = 'lazy';
         node.properties.decoding = 'async';
         return;
       }
 
-      // ============================================================
-      // 业务逻辑：跳过 WebP/AVIF
-      // ============================================================
+      // 3. 业务逻辑：跳过 WebP/AVIF
       const pathname = urlObj.pathname.toLowerCase();
       if (pathname.endsWith('.webp') || pathname.endsWith('.avif')) {
         node.properties.loading = 'lazy';
@@ -45,28 +35,37 @@ export function rehypeImageOptimization() {
         return; 
       }
 
-      // ============================================================
-      // 业务逻辑：构造 Worker 链接
-      // ============================================================
+      // 4. 构造 Worker 链接函数
       const generateWorkerUrl = (originalSrc, width) => {
         const workerUrl = new URL('https://opt.mckero.com/');
         workerUrl.searchParams.set('url', originalSrc);
-        if (width) {
-          workerUrl.searchParams.set('width', width);
-        }
+        if (width) workerUrl.searchParams.set('width', width);
         return workerUrl.toString();
       };
 
-      // 修改 src (默认 800px)
+      // ============================================================
+      // 核心升级区域
+      // ============================================================
+
+      // 默认 src (回落地址): 给 800w，保证兼容性
       node.properties.src = generateWorkerUrl(src, 800);
 
-      // 生成 srcset (500px 手机, 800px 电脑)
-      const srcSmall = generateWorkerUrl(src, 500);
-      const srcMedium = generateWorkerUrl(src, 800);
-      node.properties.srcset = `${srcSmall} 500w, ${srcMedium} 800w`;
+      // 生成三档 srcset：
+      // 500w: 省流/小屏
+      // 800w: 标准/PC
+      // 1200w: 高清/Retina
+      const s500 = generateWorkerUrl(src, 500);
+      const s800 = generateWorkerUrl(src, 800);
+      const s1200 = generateWorkerUrl(src, 1200);
+      
+      node.properties.srcset = `${s500} 500w, ${s800} 800w, ${s1200} 1200w`;
 
-      // 补充标准属性
-      node.properties.sizes = '(max-width: 600px) 500px, 800px';
+      // 升级 sizes 逻辑：
+      // (max-width: 600px) 100vw -> 手机端：图片宽度 = 屏幕宽度 (更符合实际)
+      // 800px -> 电脑端：图片最大就是 800px (文章容器宽度)
+      node.properties.sizes = '(max-width: 600px) 100vw, 800px';
+      
+      // 标准优化属性
       node.properties.loading = 'lazy';
       node.properties.decoding = 'async';
     });
