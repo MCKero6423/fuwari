@@ -4,7 +4,7 @@ export function rehypeImageOptimization() {
   return (tree) => {
     visit(tree, 'element', (node) => {
       
-      // 1. 基础防御检查
+      // 1. 基础防御
       if (node.tagName !== 'img' || !node.properties) return;
       
       const src = node.properties.src;
@@ -14,7 +14,6 @@ export function rehypeImageOptimization() {
       try {
         urlObj = new URL(src);
       } catch (e) {
-        // 相对路径兜底
         node.properties.loading = 'lazy';
         node.properties.decoding = 'async';
         return; 
@@ -35,7 +34,7 @@ export function rehypeImageOptimization() {
         return; 
       }
 
-      // 4. 构造 Worker 链接函数
+      // 4. 构造 Worker 链接
       const generateWorkerUrl = (originalSrc, width) => {
         const workerUrl = new URL('https://opt.mckero.com/');
         workerUrl.searchParams.set('url', originalSrc);
@@ -44,28 +43,24 @@ export function rehypeImageOptimization() {
       };
 
       // ============================================================
-      // 核心升级区域
+      // 最终版配置：四大金刚 (500, 800, 1200, 1600)
       // ============================================================
 
-      // 默认 src (回落地址): 给 800w，保证兼容性
+      // 默认 src: 给 800w (兼容性最好)
       node.properties.src = generateWorkerUrl(src, 800);
 
-      // 生成三档 srcset：
-      // 500w: 省流/小屏
-      // 800w: 标准/PC
-      // 1200w: 高清/Retina
+      // 生成 srcset
       const s500 = generateWorkerUrl(src, 500);
       const s800 = generateWorkerUrl(src, 800);
       const s1200 = generateWorkerUrl(src, 1200);
+      const s1600 = generateWorkerUrl(src, 1600); // 新增：MacBook/4K 专用
       
-      node.properties.srcset = `${s500} 500w, ${s800} 800w, ${s1200} 1200w`;
+      node.properties.srcset = `${s500} 500w, ${s800} 800w, ${s1200} 1200w, ${s1600} 1600w`;
 
-      // 升级 sizes 逻辑：
-      // (max-width: 600px) 100vw -> 手机端：图片宽度 = 屏幕宽度 (更符合实际)
-      // 800px -> 电脑端：图片最大就是 800px (文章容器宽度)
+      // sizes 逻辑 (保持不变)
+      // 手机端占满屏，电脑端最大 800px
       node.properties.sizes = '(max-width: 600px) 100vw, 800px';
       
-      // 标准优化属性
       node.properties.loading = 'lazy';
       node.properties.decoding = 'async';
     });
