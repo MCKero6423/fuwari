@@ -70,14 +70,15 @@ const friends = [
     <!-- 头部 -->
     <div class="flex items-center gap-4 mb-8 mt-4 px-2">
         <div class="avatar">
-            <!-- 使用主题的主色调 (bg-primary) -->
             <div class="bg-[var(--primary)] text-white rounded-xl w-14 flex items-center justify-center shadow-lg">
                 <Icon name="material-symbols:diversity-3" class="text-3xl" />
             </div>
         </div>
         <div>
+            <!-- 标题文字 -->
             <h1 class="text-3xl font-bold text-[var(--primary)]">我的朋友们</h1>
-            <p class="opacity-60 mt-1">在这里发现更多有趣的世界</p>
+            <!-- 副标题：白天黑字(50%透明)，晚上白字(50%透明) -->
+            <p class="text-black/50 dark:text-white/50 mt-1">在这里发现更多有趣的世界</p>
         </div>
     </div>
 
@@ -90,12 +91,7 @@ const friends = [
                     target="_blank" 
                     class="group relative block"
                 >
-                    <!-- 关键修改：使用了 card-base 类
-                         这是 Fuwari 全局定义的类，它会自动处理：
-                         1. 白天/黑夜背景色
-                         2. 透明度
-                         3. 边框颜色
-                    -->
+                    <!-- 卡片背景：保持 card-base 的玻璃质感 -->
                     <div class="card-base flex items-center gap-4 p-4 rounded-xl transition-all duration-300
                                 hover:scale-[1.02] hover:shadow-lg
                                 border border-black/5 dark:border-white/5">
@@ -107,13 +103,26 @@ const friends = [
                             </div>
                         </div>
 
-                        <!-- 文字信息 -->
+                        <!-- 文字信息区 -->
                         <div class="flex-1 min-w-0">
-                            <!-- text-75 是 Fuwari 的常用透明度写法，或者直接用 opacity -->
-                            <h3 class="text-lg font-bold truncate group-hover:text-[var(--primary)] transition-colors">
+                            <!-- 
+                                重点修改在这里：
+                                1. text-black/90: 白天是深黑
+                                2. dark:text-white/90: 晚上是亮白
+                            -->
+                            <h3 class="text-lg font-bold truncate 
+                                       text-black/90 dark:text-white/90 
+                                       group-hover:text-[var(--primary)] transition-colors">
                                 {friend.name}
                             </h3>
-                            <p class="text-sm opacity-60 line-clamp-2 mt-1">
+                            
+                            <!-- 
+                                描述文字：
+                                1. text-black/50: 白天是浅黑
+                                2. dark:text-white/50: 晚上是浅白
+                            -->
+                            <p class="text-sm line-clamp-2 mt-1
+                                      text-black/50 dark:text-white/50">
                                 {friend.desc}
                             </p>
                         </div>
@@ -124,14 +133,14 @@ const friends = [
     </div>
 
     <!-- 底部申请框 -->
-    <!-- 同样使用了 card-base 保持统一风格 -->
     <div class="card-base rounded-xl p-6 flex items-center gap-4 border border-black/5 dark:border-white/5">
         <div class="p-3 bg-[var(--primary)] text-white rounded-full">
             <Icon name="material-symbols:add-link" class="text-2xl" />
         </div>
         <div class="flex-1">
-            <h3 class="font-bold text-[var(--primary)]">想交换友链？</h3>
-            <p class="text-sm opacity-60">欢迎优秀博客互换友链。</p>
+            <!-- 这里的文字也做了同样的适配 -->
+            <h3 class="font-bold text-black/90 dark:text-white/90">想交换友链？</h3>
+            <p class="text-sm text-black/50 dark:text-white/50">欢迎优秀博客互换友链。</p>
         </div>
         <a 
             href="https://github.com/MCKero6423/fuwari/blob/main/src/pages/friends.astro" 
