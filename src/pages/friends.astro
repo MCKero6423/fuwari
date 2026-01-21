@@ -1,132 +1,126 @@
 ---
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
+
+// 1. 这里是数据区，以后要加友链，就在这里加！
+const friends = [
+  {
+    name: "Ad_closeNN の Blog",
+    url: "https://adclosenn.top",
+    avatar: "https://adclosenn.top/assets/avatar.jpg",
+    desc: "Ad_closeNN 的小站，时不时会刷新一些野生东西"
+  },
+  {
+    name: "LYEy_isine个人博客",
+    url: "https://caiyifeng.top/",
+    avatar: "https://img.cdn1.vip/i/68bbdee513eb9_1757142757.webp",
+    desc: "花海无一日,少年踏自来"
+  },
+  {
+    name: "Elykia",
+    url: "https://blog.elykia.cn/",
+    avatar: "https://bu.dusays.com/2024/10/25/671b2438203a6.gif",
+    desc: "致以无暇之人"
+  },
+  {
+    name: "咖啡豆子coffee的小站",
+    url: "https://blog.kfdzcoffee.cn",
+    avatar: "https://images.kfdzcoffee.cn/i/1/avatar.png",
+    desc: "所有奇迹的始发点"
+  },
+  {
+    name: "Pinpe 的云端",
+    url: "https://pinpe.top/",
+    avatar: "https://pinpe.top/head.jpg",
+    desc: "一个属于自己的云朵。"
+  },
+  {
+    name: "星雪",
+    url: "https://snowtafir.top",
+    avatar: "https://snowtafir.top/img/avatar.webp",
+    desc: "银光渐深星无灭，古杉月空探花雪。"
+  },
+  {
+    name: "AcoFork Blog",
+    url: "https://2x.nz/",
+    avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=0",
+    desc: "爱你所爱~ ❤。"
+  },
+  {
+    name: "路明笔记",
+    url: "https://luming.cool",
+    avatar: "https://cn.cravatar.com/avatar/302380667bdaf4e1390800e62494d4af?s=500&r=X",
+    desc: "不慌张，不绝望，不狂妄，不投降。"
+  },
+  {
+    name: "张洪Heo",
+    url: "https://blog.zhheo.com/",
+    avatar: "https://img.zhheo.com/i/67d8fa75943e4.webp",
+    desc: "分享设计与科技生活"
+  },
+  {
+    name: "神奇的Willem",
+    url: "https://cdn.bk.wished.cc/",
+    avatar: "https://cdn.bk.wished.cc/upload/%E6%88%AA%E5%B1%8F2025-11-01%2014.37.30_compressed.png",
+    desc: "我们为什么活着？当然是为了我们以后更好的活着。"
+  },
+];
 ---
 
 <MainGridLayout title="友链">
-    <div class="card-base p-6 md:p-8">
-        <div class="flex items-center gap-2 mb-6">
-            <div class="h-8 w-8 rounded-lg bg-[var(--primary)] flex items-center justify-center text-white dark:text-black/70">
-                <Icon name="material-symbols:diversity-3" class="text-[1.5rem]">
+    <!-- 页面头部 -->
+    <div class="flex items-center gap-4 mb-8 mt-4 px-2">
+        <div class="avatar placeholder">
+            <div class="bg-primary text-primary-content rounded-xl w-14 shadow-lg">
+                <Icon name="material-symbols:diversity-3" class="text-3xl" />
             </div>
-            <h1 class="text-2xl font-bold text-black dark:text-white">友链</h1>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a href="https://adclosenn.top" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://adclosenn.top/assets/avatar.jpg" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white">Ad_closeNN の Blog</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">Ad_closeNN 的小站，时不时会刷新一些野生东西 | ✨ 欢迎友链，祝大家天天开心！ ✨</div>
-            </a>
-            <a href="https://caiyifeng.top/" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://img.cdn1.vip/i/68bbdee513eb9_1757142757.webp" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white">LYEy_isine个人博客</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">花海无一日,少年踏自来</div>
-            </a>
-            <a href="https://blog.elykia.cn/" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://bu.dusays.com/2024/10/25/671b2438203a6.gif" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white">Elykia</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">致以无暇之人</div>
-            </a>
-            <a href="https://blog.kfdzcoffee.cn" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://images.kfdzcoffee.cn/i/1/avatar.png" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white">咖啡豆子coffee的小站</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">所有奇迹的始发点</div>
-            </a>
-            <a href="https://pinpe.top/" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://pinpe.top/head.jpg" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white">Pinpe 的云端</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">一个属于自己的云朵。</div>
-            </a>
-            <a href="https://snowtafir.top" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://snowtafir.top/img/avatar.webp" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white">星雪</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">银光渐深星无灭，古杉月空探花雪。浮尘荡风埃不落，杨柳春辰与露飞。</div>
-            </a>
-            <a href="https://2x.nz/" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=0" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white"> AcoFork Blog</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">爱你所爱~ ❤。</div>
-            </a>
-            <a href="https://luming.cool" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://cn.cravatar.com/avatar/302380667bdaf4e1390800e62494d4af?s=500&r=X" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white"> 路明笔记</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">不慌张，不绝望，不狂妄，不投降。</div>
-            </a>
-            <a href="https://blog.zhheo.com/" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://img.zhheo.com/i/67d8fa75943e4.webp" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white"> 张洪Heo</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">分享设计与科技生活</div>
-            </a>
-            <a href="https://cdn.bk.wished.cc/" target="_blank" class="friend-card">
-                <div class="flex items-center gap-2">
-                    <img src="https://cdn.bk.wished.cc/upload/%E6%88%AA%E5%B1%8F2025-11-01%2014.37.30_compressed.png" loading="lazy" class="w-5 h-5 rounded">
-                    <div class="font-bold text-black dark:text-white"> 神奇的Willem</div>
-                </div>
-                <div class="text-sm text-black/50 dark:text-white/50">我们为什么活着？当然是为了我们以后更好的活着。</div>
-            </a>
+        <div>
+            <h1 class="text-3xl font-bold text-base-content">我的朋友们</h1>
+            <p class="text-base-content/60 mt-1">在这里发现更多有趣的世界</p>
         </div>
-
-        <!-- 申请友链 -->
-        <div class="sponsors-section mt-8">
-        	<h2 class="text-xl font-bold text-black dark:text-white mb-4 flex items-center gap-2">
-        		<Icon name="material-symbols:group" class="text-[1.5rem] text-[var(--primary)]"/>
-        		将您的网站加入本站友链
-        	</h2>
-        	<p class="text-sm text-black/60 dark:text-white/60">
-        		请自行提交PR <a target="_blank" href="https://github.com/MCKero6423/fuwari/blob/main/src/pages/friends.astro" class="transition link text-[var(--primary)] font-medium underline">点击这里提交</a>
-        	</p>
-        <br>
     </div>
 
+    <!-- 友链卡片网格 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        {
+            friends.map((friend) => (
+                <a 
+                    href={friend.url} 
+                    target="_blank" 
+                    class="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-base-200"
+                >
+                    <div class="card-body p-5 flex flex-row items-center gap-4">
+                        <div class="avatar">
+                            <div class="w-14 mask mask-squircle bg-base-200">
+                                <img src={friend.avatar} loading="lazy" alt={friend.name} />
+                            </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="card-title text-base font-bold truncate text-base-content">{friend.name}</h3>
+                            <p class="text-xs text-base-content/60 line-clamp-2 mt-1">{friend.desc}</p>
+                        </div>
+                    </div>
+                </a>
+            ))
+        }
+    </div>
+
+    <!-- 申请友链区域 -->
+    <div class="alert shadow-lg bg-base-100 border-l-4 border-primary">
+        <Icon name="material-symbols:add-link" class="text-2xl text-primary" />
+        <div>
+            <h3 class="font-bold">想交换友链？</h3>
+            <div class="text-sm opacity-80">
+                欢迎互换友链。请确保您的网站可以正常访问。
+            </div>
+        </div>
+        <a 
+            href="https://github.com/MCKero6423/fuwari/blob/main/src/pages/friends.astro" 
+            target="_blank"
+            class="btn btn-sm btn-primary"
+        >
+            提交申请
+        </a>
+    </div>
 </MainGridLayout>
-
-<style>
-    .friend-card {
-        @apply flex flex-col gap-1 p-4 rounded-lg bg-[var(--card-bg)] hover:bg-black/5 dark:hover:bg-white/5;
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.15s;
-    }
-    
-    .friend-card:active {
-        scale: .98;
-        background-color: var(--btn-regular-bg-active);
-    }
-    
-    .friend-card:hover {
-        background-color: var(--btn-regular-bg-hover);
-    }
-    
-    .friend-card:hover .font-bold {
-        color: var(--btn-content);
-    }
-    
-    .friend-card:hover .text-sm {
-    @apply text-gray-700 dark:text-white;
-    }
-
-    .friend-card .font-bold,
-    .friend-card .text-sm {
-        transition-property: color;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.15s;
-    }
-</style>
