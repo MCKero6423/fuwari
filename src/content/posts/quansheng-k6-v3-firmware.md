@@ -1,10 +1,10 @@
----  
-title: 泉盛UV-K6 V3刷机  
-published: 2025-02-13  
-description: 泉盛UV-K6 V3版本使用新MCU的刷机指南  
-tags: [硬件, 刷机, 对讲机]  
-category: 教程  
-draft: false  
+---
+title: 泉盛UV-K6 V3刷机
+published: 2026-02-13
+description: 泉盛UV-K6 V3版本使用新MCU的刷机指南
+tags: [硬件, 刷机, 对讲机]
+category: 教程
+draft: false
 ---
 
 # 泉盛UV-K6 V3刷机
