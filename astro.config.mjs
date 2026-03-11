@@ -24,7 +24,6 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import rehypeExternalLinks from 'rehype-external-links';
-import { rehypeImageOptimization } from "./rehype-image-optimization.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -115,7 +114,6 @@ export default defineConfig({
 			parseDirectiveNode,
 		],
 		rehypePlugins: [
-		    rehypeImageOptimization,
 			rehypeKatex,
 			rehypeSlug,
 			[
