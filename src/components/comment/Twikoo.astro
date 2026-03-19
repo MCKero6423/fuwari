@@ -14,11 +14,31 @@ const config = {
 
 <div id="tcomment"></div>
 <script define:vars={{ config }}>
+// Returns true when the user has granted functional consent.
+// TermsFeed stores cookie_consent_level as a JSON object, e.g.
+// '{"strictly-necessary":true,"functional":true}' or as a
+// comma-separated string – handle both gracefully.
+function _hasFunctionalConsent() {
+  try {
+    var raw = localStorage.getItem('cookie_consent_level') || '';
+    if (!raw) return false;
+    try {
+      var parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        var val = parsed['functional'];
+        if (typeof val === 'boolean') return val;
+        if (typeof val === 'string') return val === 'allow' || val === 'true';
+      }
+    } catch (e) { /* not JSON – fall through to string check */ }
+    // Comma-separated fallback: "strictly-necessary,functional"
+    return raw.indexOf('functional') >= 0;
+  } catch (e) {
+    return false; // localStorage unavailable
+  }
+}
+
 function loadTwikoo() {
-  // Check functional consent via TermsFeed localStorage
-  var level = '';
-  try { level = localStorage.getItem('cookie_consent_level') || ''; } catch (e) { /* localStorage unavailable – default to no consent */ }
-  if (!level.includes('functional')) {
+  if (!_hasFunctionalConsent()) {
     // Record that a load was requested so we can retry when consent is granted
     window._twikooLoadPending = true;
     return;

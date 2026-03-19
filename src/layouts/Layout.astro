@@ -145,6 +145,40 @@ const bannerOffset =
 		<!-- TermsFeed Cookie Consent -->
 		<script src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
 		<script is:inline>
+		// TermsFeed calls these global window functions when the user changes consent.
+		// They must be defined BEFORE cookieconsent.run() so they are ready when the
+		// library initialises and when the user interacts with the consent banner.
+		(function () {
+			function _dispatchConsentUpdated() {
+				document.dispatchEvent(new CustomEvent('cookieConsentUpdated'));
+			}
+			window.cookieconsent_accept_all = _dispatchConsentUpdated;
+			window.cookieconsent_reject_all = _dispatchConsentUpdated;
+			window.cookieconsent_save       = _dispatchConsentUpdated;
+
+			// Belt-and-suspenders: also listen for DOM-event dispatch used by some
+			// TermsFeed versions, on both document and window.
+			['cookieconsent_accept_all', 'cookieconsent_reject_all', 'cookieconsent_save'].forEach(function (evtName) {
+				document.addEventListener(evtName, _dispatchConsentUpdated);
+				window.addEventListener(evtName, _dispatchConsentUpdated);
+			});
+
+			// Polling fallback: detect localStorage changes (e.g. consent set in
+			// another tab or if the callback was not called for any reason).
+			var _lastLevel = '';
+			try { _lastLevel = localStorage.getItem('cookie_consent_level') || ''; } catch (e) {}
+			var _pollTimer = setInterval(function () {
+				var cur = '';
+				try { cur = localStorage.getItem('cookie_consent_level') || ''; } catch (e) {}
+				if (cur !== _lastLevel) {
+					_lastLevel = cur;
+					_dispatchConsentUpdated();
+				}
+				// Stop polling once a non-empty consent value is persisted.
+				if (cur) clearInterval(_pollTimer);
+			}, 500);
+		}());
+
 		document.addEventListener('DOMContentLoaded', function () {
 			if (typeof cookieconsent === 'undefined') return;
 			cookieconsent.run({
@@ -158,12 +192,6 @@ const bannerOffset =
 				"page_refresh_confirmation_buttons": false,
 				"website_name": "MCKero blog",
 				"website_privacy_policy_url": "https://blog.mckero.com/about/"
-			});
-			// Relay TermsFeed consent events as a single custom event so components can react
-			['cookieconsent_accept_all', 'cookieconsent_reject_all', 'cookieconsent_save'].forEach(function (evtName) {
-				window.addEventListener(evtName, function () {
-					document.dispatchEvent(new CustomEvent('cookieConsentUpdated'));
-				});
 			});
 		});
 		</script>
