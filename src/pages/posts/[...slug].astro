@@ -148,8 +148,10 @@ const jsonLd = {
         window.tianliGPT_Title = '智能摘要';
         window.tianliGPT_key = 'S-HMJ7UXQGBIAZ0U8Q';
 
-        // 立即尝试初始化
-        function tryInitTianliGPT() {
+        // Expose on window so the loader script's onload handler (in a different
+        // inline script block) can always reach the latest version of this function
+        // after Swup page transitions replace the DOM content.
+        window._tryInitTianliGPT = function tryInitTianliGPT() {
             if (typeof window.tianliGPT === 'object' && 
                 typeof window.tianliGPT.checkURLAndRun === 'function') {
                 
@@ -166,33 +168,52 @@ const jsonLd = {
                 }, 500);
             } else if (window.tianliGPT_scriptLoaded) {
                 // 脚本已请求加载但尚未就绪，继续等待
-                setTimeout(tryInitTianliGPT, 200);
+                setTimeout(window._tryInitTianliGPT, 200);
             }
             // else: 脚本未加载（无功能性同意），停止轮询
-        }
+        };
 
         // 开始尝试
-        tryInitTianliGPT();
+        window._tryInitTianliGPT();
     </script>
     
     <!-- 主脚本 - 只在获得功能性同意后加载，且只加载一次 -->
     <script is:inline>
         (function () {
-            if (window.tianliGPT_scriptLoaded) return;
+            // Returns true when the user has granted functional consent.
+            // TermsFeed stores cookie_consent_level as JSON or comma-separated string.
+            function _hasFunctionalConsent() {
+                try {
+                    var raw = localStorage.getItem('cookie_consent_level') || '';
+                    if (!raw) return false;
+                    try {
+                        var parsed = JSON.parse(raw);
+                        if (parsed && typeof parsed === 'object') {
+                            var val = parsed['functional'];
+                            if (typeof val === 'boolean') return val;
+                            if (typeof val === 'string') return val === 'allow' || val === 'true';
+                        }
+                    } catch (e) { /* not JSON – fall through */ }
+                    return raw.indexOf('functional') >= 0;
+                } catch (e) {
+                    return false;
+                }
+            }
 
             function doLoadTianliGPT() {
-                if (window.tianliGPT_scriptLoaded) return;
-                // Check functional consent via TermsFeed localStorage
-                var level = '';
-                try { level = localStorage.getItem('cookie_consent_level') || ''; } catch (e) { /* localStorage unavailable – default to no consent */ }
-                if (!level.includes('functional')) return;
+                if (window.tianliGPT_scriptLoaded) {
+                    // Script already loaded; just (re-)initialise for the current page.
+                    if (typeof window._tryInitTianliGPT === 'function') window._tryInitTianliGPT();
+                    return;
+                }
+                if (!_hasFunctionalConsent()) return;
 
                 window.tianliGPT_scriptLoaded = true;
                 var script = document.createElement('script');
                 script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
                 script.async = true;
                 script.onload = function () {
-                    if (typeof tryInitTianliGPT === 'function') tryInitTianliGPT();
+                    if (typeof window._tryInitTianliGPT === 'function') window._tryInitTianliGPT();
                 };
                 document.body.appendChild(script);
             }
