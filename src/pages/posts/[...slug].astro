@@ -164,26 +164,43 @@ const jsonLd = {
                         console.log('✓ TianliGPT 初始化成功');
                     }
                 }, 500);
-            } else {
-                // 脚本还没加载,继续等待
+            } else if (window.tianliGPT_scriptLoaded) {
+                // 脚本已请求加载但尚未就绪，继续等待
                 setTimeout(tryInitTianliGPT, 200);
             }
+            // else: 脚本未加载（无功能性同意），停止轮询
         }
 
         // 开始尝试
         tryInitTianliGPT();
     </script>
     
-    <!-- 主脚本 - 只加载一次 -->
+    <!-- 主脚本 - 只在获得功能性同意后加载，且只加载一次 -->
     <script is:inline>
-        // 使用全局标志避免重复加载脚本
-        if (!window.tianliGPT_scriptLoaded) {
-            window.tianliGPT_scriptLoaded = true;
-            const script = document.createElement('script');
-            script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
-            script.async = true;
-            document.body.appendChild(script);
-        }
+        (function () {
+            if (window.tianliGPT_scriptLoaded) return;
+
+            function doLoadTianliGPT() {
+                if (window.tianliGPT_scriptLoaded) return;
+                // Check functional consent via TermsFeed localStorage
+                var level = '';
+                try { level = localStorage.getItem('cookie_consent_level') || ''; } catch (e) { /* localStorage unavailable – default to no consent */ }
+                if (!level.includes('functional')) return;
+
+                window.tianliGPT_scriptLoaded = true;
+                var script = document.createElement('script');
+                script.src = 'https://ai.zhheo.com/static/public/tianli_gpt.min.js';
+                script.async = true;
+                script.onload = function () {
+                    if (typeof tryInitTianliGPT === 'function') tryInitTianliGPT();
+                };
+                document.body.appendChild(script);
+            }
+
+            doLoadTianliGPT();
+            // Retry when user grants consent on the current page
+            document.addEventListener('cookieConsentUpdated', doLoadTianliGPT);
+        }());
     </script>
 </div>
 

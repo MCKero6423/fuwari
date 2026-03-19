@@ -142,12 +142,38 @@ const bannerOffset =
 			'page-width': `${PAGE_WIDTH}rem`,
 		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
-		<!-- Umami Analytics -->
-		<script defer src="https://umami.mckero.com/script.js" data-website-id="a4ba198a-25a0-4631-84e1-e3b62e418c87"></script>
+		<!-- TermsFeed Cookie Consent -->
+		<script src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+		<script is:inline>
+		document.addEventListener('DOMContentLoaded', function () {
+			if (typeof cookieconsent === 'undefined') return;
+			cookieconsent.run({
+				"notice_banner_type": "simple",
+				"consent_type": "express",
+				"palette": "dark",
+				"language": "en",
+				"page_load_consent_levels": ["strictly-necessary"],
+				"notice_banner_reject_button_hide": false,
+				"preferences_center_close_button_hide": false,
+				"page_refresh_confirmation_buttons": false,
+				"website_name": "MCKero blog",
+				"website_privacy_policy_url": "https://blog.mckero.com/about/"
+			});
+			// Relay TermsFeed consent events as a single custom event so components can react
+			['cookieconsent_accept_all', 'cookieconsent_reject_all', 'cookieconsent_save'].forEach(function (evtName) {
+				window.addEventListener(evtName, function () {
+					document.dispatchEvent(new CustomEvent('cookieConsentUpdated'));
+				});
+			});
+		});
+		</script>
 
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-G9W2J9J4HV"></script>
-		<script>
+		<!-- Umami Analytics (blocked until analytics consent is granted) -->
+		<script type="text/plain" cookie-consent="analytics" defer src="https://umami.mckero.com/script.js" data-website-id="a4ba198a-25a0-4631-84e1-e3b62e418c87"></script>
+
+		<!-- Google tag (gtag.js) (blocked until analytics consent is granted) -->
+		<script type="text/plain" cookie-consent="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-G9W2J9J4HV"></script>
+		<script type="text/plain" cookie-consent="analytics" is:inline>
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
