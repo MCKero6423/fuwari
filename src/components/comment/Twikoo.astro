@@ -15,9 +15,27 @@ const config = {
 <div id="tcomment"></div>
 <script define:vars={{ config }}>
 function loadTwikoo() {
+  // Check functional consent via TermsFeed localStorage
+  var level = '';
+  try { level = localStorage.getItem('cookie_consent_level') || ''; } catch (e) { /* localStorage unavailable – default to no consent */ }
+  if (!level.includes('functional')) {
+    // Record that a load was requested so we can retry when consent is granted
+    window._twikooLoadPending = true;
+    return;
+  }
+
+  window._twikooLoadPending = false;
 
   // 动态加载 Twikoo 脚本，并在加载完成后执行 twikoo.init
+  if (window.twikooScriptLoaded) {
+    // Script already in DOM – just re-initialise for the current page
+    if (window.twikoo) {
+      window.twikoo.init(config);
+    }
+    return;
+  }
 
+  window.twikooScriptLoaded = true;
   const script = document.createElement('script');
   script.src = 'https://blog.mckero.com/twikoo.min.js';
   script.defer = true;
@@ -31,5 +49,13 @@ function loadTwikoo() {
   // };
   document.body.appendChild(script);
 }
-  document.addEventListener("loadComment", loadTwikoo, { once: true }); // 监听加载评论事件，但是我们只能监听一次，从而避免多次触发。
+// 监听加载评论事件，但是我们只能监听一次，从而避免多次触发。
+document.addEventListener("loadComment", loadTwikoo, { once: true });
+
+// Retry loading when the user accepts functional cookies on the current page
+document.addEventListener('cookieConsentUpdated', function () {
+  if (window._twikooLoadPending && document.getElementById('tcomment')) {
+    loadTwikoo();
+  }
+});
 </script>
