@@ -12,14 +12,22 @@ const currentYear = new Date().getFullYear();
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a>
 
-        <!-- 在 Sitemap 后面添加第一个换行符 -->
+        <!-- 在 Sitemap 后面添加换行符 -->
+        <br>
+
+        <!-- DMCA 徽章 -->
+        <a href="//www.dmca.com/Protection/Status.aspx?ID=aa0f2b8c-d61b-47c6-816e-a542cd89bae3" title="DMCA.com Protection Status" class="dmca-badge">
+            <img src="https://images.dmca.com/Badges/dmca_protected_sml_120c.png?ID=aa0f2b8c-d61b-47c6-816e-a542cd89bae3" alt="DMCA.com Protection Status" />
+        </a>
+
+        <!-- DMCA 徽章后换行 -->
         <br>
 
         <span class="transition text-[var(--primary)] font-medium">
             萌ICP备20250659号
         </span>
 
-        <!-- 在备案号后面添加第二个换行符 -->
+        <!-- 在备案号后面添加换行符 -->
         <br>
 
         Powered by
@@ -27,3 +35,6 @@ const currentYear = new Date().getFullYear();
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
     </div>
 </div>
+
+<!-- DMCA 徽章辅助脚本 -->
+<script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
