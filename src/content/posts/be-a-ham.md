@@ -1,6 +1,6 @@
 ---
 title: 我成为一个业余无线电爱好者的经历
-published: 2025-11-26
+published: 2026-04-06
 description: 我终于去考试了！
 tags:
   - 无线电
