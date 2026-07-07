@@ -1,5 +1,5 @@
 ---
-title: ChatGPT-5与Claude 4相关智力对比
+title: 将域名的邮箱迁移至migadu
 published: 2026-07-07
 description: 本文记录了作者“闲得没事干”将域名邮箱迁移至 Migadu 的全过程。文中对比了腾讯、飞书、Fastmail、Google 等国内外邮件服务商的优缺点，最终选择性价比突出的 Migadu 年付 19 美元套餐，并分享了 DNS 配置与邮件评分满分实测体验，适合爱折腾的域名持有者参考。
 tags:
