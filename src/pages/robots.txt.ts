@@ -4,6 +4,12 @@ const robotsTxt = `
 User-agent: *
 Disallow: /_astro/
 Disallow: /archive/
+User-agent: GPTBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: PerplexityBot
+Disallow: /
 
 Sitemap: ${new URL("sitemap-index.xml", import.meta.env.SITE).href}
 `.trim();
