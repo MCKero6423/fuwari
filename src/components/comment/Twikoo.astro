@@ -14,10 +14,48 @@ const config = {
 
 <div id="tcomment"></div>
 <script define:vars={{ config }}>
+// Returns true when the user has granted functional consent.
+// TermsFeed stores cookie_consent_level as a JSON object, e.g.
+// '{"strictly-necessary":true,"functional":true}' or as a
+// comma-separated string – handle both gracefully.
+function _hasFunctionalConsent() {
+  try {
+    var raw = localStorage.getItem('cookie_consent_level') || '';
+    if (!raw) return false;
+    try {
+      var parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        var val = parsed['functional'];
+        if (typeof val === 'boolean') return val;
+        if (typeof val === 'string') return val === 'allow' || val === 'true';
+      }
+    } catch (e) { /* not JSON – fall through to string check */ }
+    // Comma-separated fallback: "strictly-necessary,functional"
+    return raw.indexOf('functional') >= 0;
+  } catch (e) {
+    return false; // localStorage unavailable
+  }
+}
+
 function loadTwikoo() {
+  if (!_hasFunctionalConsent()) {
+    // Record that a load was requested so we can retry when consent is granted
+    window._twikooLoadPending = true;
+    return;
+  }
+
+  window._twikooLoadPending = false;
 
   // 动态加载 Twikoo 脚本，并在加载完成后执行 twikoo.init
+  if (window.twikooScriptLoaded) {
+    // Script already in DOM – just re-initialise for the current page
+    if (window.twikoo) {
+      window.twikoo.init(config);
+    }
+    return;
+  }
 
+  window.twikooScriptLoaded = true;
   const script = document.createElement('script');
   script.src = 'https://blog.mckero.com/twikoo.min.js';
   script.defer = true;
@@ -31,5 +69,13 @@ function loadTwikoo() {
   // };
   document.body.appendChild(script);
 }
-  document.addEventListener("loadComment", loadTwikoo, { once: true }); // 监听加载评论事件，但是我们只能监听一次，从而避免多次触发。
+// 监听加载评论事件，但是我们只能监听一次，从而避免多次触发。
+document.addEventListener("loadComment", loadTwikoo, { once: true });
+
+// Retry loading when the user accepts functional cookies on the current page
+document.addEventListener('cookieConsentUpdated', function () {
+  if (window._twikooLoadPending && document.getElementById('tcomment')) {
+    loadTwikoo();
+  }
+});
 </script>
