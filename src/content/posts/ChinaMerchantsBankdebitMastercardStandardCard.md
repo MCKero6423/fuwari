@@ -3,6 +3,12 @@ title: 招商银行的万事网联卡
 published: 2026-08-18
 description: 招商银行万事达借记卡（普卡 / 金葵花卡）使用体验与权益整理：纯人民币结算、境内走万事网联可绑微信支付宝、支持 3DS、预授权冻结 100%。
 tags:
+  - 境外支付
+  - 3DS
+  - 借记卡
+  - 万事网联
+  - 万事达
+  - 招商银行
 category: debit card
 draft: false
 series: debit card
