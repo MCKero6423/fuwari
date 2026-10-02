@@ -21,7 +21,7 @@ jobs:
         run: |
           # 取前 100 条 URL，拼成 JSON 数组（IndexNow 单次上限 10000 条）
           URLS=$(head -n 1000 urls.txt | jq -R -s -c 'split("\n") | map(select(length>0))')
-          curl -s -X POST "https://www.bing.com/indexnow" \
+          curl -s -w "\nHTTP Status: %{http_code}\n" -X POST "https://www.bing.com/indexnow" \
             -H "Content-Type: application/json" \
             -d "{
               \"host\": \"blog.mckero.com\",
