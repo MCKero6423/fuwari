@@ -1,0 +1,31 @@
+name: "IndexNow"
+
+on:
+  push:
+    branches: [main]              # 已改为 main 分支
+  schedule:
+    - cron: '0 0,12 * * *'       # 每天 UTC 0 点和 12 点运行
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch URLs from sitemap
+        run: |
+          # 从你的 sitemap 中提取所有 <loc> 标签内容
+          curl -s "https://blog.mckero.com/sitemap-0.xml" \
+            | grep -oP '(?<=<loc>)[^<]+' > urls.txt
+          echo "提取到 $(wc -l < urls.txt) 个 URL"
+
+      - name: Submit to Bing IndexNow
+        run: |
+          # 取前 100 条 URL，拼成 JSON 数组（IndexNow 单次上限 10000 条）
+          URLS=$(head -n 1000 urls.txt | jq -R -s -c 'split("\n") | map(select(length>0))')
+          curl -s -X POST "https://www.bing.com/indexnow" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"host\": \"blog.mckero.com\",
+              \"key\": \"${{ secrets.INDEXNOW_KEY }}\",
+              \"keyLocation\": \"${{ secrets.INDEXNOW_KEY_LOCATION }}\",
+              \"urlList\": $URLS
+            }"
